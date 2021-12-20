@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "963321836434",
+    "project_id": "message-app-cede6",
+    "storage_bucket": "message-app-cede6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963321836434:android:4530739b4e2a2cb78e874b",
+        "android_client_info": {
+          "package_name": "com.example.messageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963321836434-m16gfncj4neu6r8jia4h109dv03c4ui5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.messageapp",
+            "certificate_hash": "770f4e75bb279dc1042d89b74513d95c4426f63e"
+          }
+        },
+        {
+          "client_id": "963321836434-4mvv0fn94q3t66toaih6nmkcisd99mue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJx8Y_8yFw4zaHl9xx-V93QU8E7V1QH-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963321836434-4mvv0fn94q3t66toaih6nmkcisd99mue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
