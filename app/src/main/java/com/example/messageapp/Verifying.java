@@ -110,6 +110,7 @@ public class Verifying extends Fragment {
             }
         });
 
+
         callbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
