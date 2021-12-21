@@ -2,6 +2,8 @@ package com.example.messageapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -42,13 +44,6 @@ public class Verifying extends Fragment {
     String verificationId;
     CustomEditText edotp;
     SmsBroadcastReceiver smsBroadcastReceiver;
-    private static Verifying inst;
-
-
-
-
-
-
 
 
     @Override
@@ -71,7 +66,9 @@ public class Verifying extends Fragment {
         edotp = root.findViewById(R.id.editotp);
         Button verifubtn = root.findViewById(R.id.votpbtn);
 
+
         startSmsUserConsent();
+        retrieveSms();
 
 
         wrobtn.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +79,7 @@ public class Verifying extends Fragment {
         });
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
-        String mobile = sharedPreferences.getString("phonenumber","");
+        String mobile = sharedPreferences.getString("phonenumber", "");
 
         sendVerificationCode(mobile);
 
@@ -95,8 +92,7 @@ public class Verifying extends Fragment {
                     edotp.setError("Enter valid code");
                     edotp.requestFocus();
                     return;
-                }
-                else {
+                } else {
                     // if OTP field is not empty calling
                     // method to verify the OTP.
                     verifyCode(edotp.getText().toString());
@@ -106,7 +102,7 @@ public class Verifying extends Fragment {
         smsbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                         resendVerificationCode(mobile);
+                resendVerificationCode(mobile);
             }
         });
 
@@ -119,8 +115,6 @@ public class Verifying extends Fragment {
         });
         return root;
     }
-
-
 
 
     private void startSmsUserConsent() {
@@ -140,30 +134,69 @@ public class Verifying extends Fragment {
         });
     }
 
-    public static Verifying instance() {
-        return inst;
+    public void retrieveSms() {
+        SmsRetrieverClient client = SmsRetriever.getClient(getActivity().getApplicationContext());
+        Task<Void> task = client.startSmsRetriever();
+
+        task.addOnSuccessListener(new OnSuccessListener<Void>() {
+            public void onSuccess(Void db) {
+                // Android will provide message once receive. Start your broadcast receiver.
+                IntentFilter filter = new IntentFilter();
+                filter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
+                registerReceiver(new SmsBroadcastReceiver(), SmsRetriever.SEND_PERMISSION, filter);
+//                registerBroadcastReceiver();
+//                getOtpFromMessage(smsBroadcastReceiver.getResultData());
+                String message = SmsRetriever.EXTRA_SMS_MESSAGE;
+                Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+//                textViewMessage.setText(
+//                        String.format("%s - %s", getString(R.string.received_message), message));
+                getOtpFromMessage(message);
+            }
+        });
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                // Failed to start retriever, inspect Exception for more details
+            }
+        });
+
     }
 
 
-
-
-
-    void getOtpFromMessage(String message1) {
+    void getOtpFromMessage(String message) {
         // This will match any 6 digit number in the message
         Pattern pattern = Pattern.compile("(|^)\\d{6}");
-        Matcher matcher = pattern.matcher(message1);
+        Matcher matcher = pattern.matcher(message);
         if (matcher.find()) {
             edotp.setText(matcher.group(0));
 
         }
-//            }
-//        }
-//    }
+    }
+
+    private void registerBroadcastReceiver() {
+        smsBroadcastReceiver = new SmsBroadcastReceiver();
+        smsBroadcastReceiver.smsBroadcastReceiverListener =
+                new SmsBroadcastReceiver.SmsBroadcastReceiverListener() {
+                    @Override
+                    public void onSuccess(Intent intent) {
+//                        startActivityForResult(intent, REQ_USER_CONSENT);
+                    }
+
+                    @Override
+                    public void onFailure() {
+                    }
+                };
+        IntentFilter intentFilter = new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
+        registerReceiver(smsBroadcastReceiver,SmsRetriever.SEND_PERMISSION, intentFilter);
+    }
 
 
-
-
-    } @Override
+    @Override
+    public void onStart() {
+        super.onStart();
+        registerBroadcastReceiver();
+    }
+    @Override
     public void onStop() {
         super.onStop();
         unregisterReceiver(smsBroadcastReceiver);
@@ -173,27 +206,21 @@ public class Verifying extends Fragment {
     }
 
 
-
-
-
     private void resendVerificationCode(String mobile) {
 
-            PhoneAuthOptions options =
-                    PhoneAuthOptions.newBuilder(mAuth)
-                            .setPhoneNumber("+91"+ mobile)            // Phone number to verify
-                            .setTimeout(60L, TimeUnit.SECONDS)// Timeout and unit
-                            .setActivity(getActivity())
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber("+91" + mobile)            // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS)// Timeout and unit
+                        .setActivity(getActivity())
 //                        .setActivity((Activity) getActivity().getApplicationContext())// Activity (for callback binding)
-                            .setCallbacks(mCallBack)// OnVerificationStateChangedCallbacks
+                        .setCallbacks(mCallBack)// OnVerificationStateChangedCallbacks
 //                            .setForceResendingToken(token)
-                            .build();
+                        .build();
 
-            PhoneAuthProvider.verifyPhoneNumber(options);
-            // ForceResendingToken from callbacks
-        }
-
-
-
+        PhoneAuthProvider.verifyPhoneNumber(options);
+        // ForceResendingToken from callbacks
+    }
 
 
     private void signInWithCredential(PhoneAuthCredential credential) {
@@ -220,16 +247,13 @@ public class Verifying extends Fragment {
 //    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
 //   String mobile = sharedPreferences.getString("phonenumber","");
 
-   
-
-
 
     private void sendVerificationCode(String mobile) {
         // this method is used for getting
         // OTP on user phone number.
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber("+91"+ mobile)            // Phone number to verify
+                        .setPhoneNumber("+91" + mobile)            // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS)// Timeout and unit
                         .setActivity(getActivity())
 //                        .setActivity((Activity) getActivity().getApplicationContext())// Activity (for callback binding)
@@ -238,7 +262,6 @@ public class Verifying extends Fragment {
 
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
-
 
 
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks
@@ -271,7 +294,7 @@ public class Verifying extends Fragment {
                 // if the code is not null then
                 // we are setting that code to
                 // our OTP edittext field.
-               edotp.setText(code);
+                edotp.setText(code);
 
                 // after setting this code
                 // to OTP edittext field we
@@ -281,12 +304,10 @@ public class Verifying extends Fragment {
         }
 
 
-
-
-    @Override
+        @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-        Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-    }
+            Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     };
 
     private void verifyCode(String code) {
@@ -297,6 +318,9 @@ public class Verifying extends Fragment {
         signInWithCredential(credential);
     }
 
+
+    private void registerReceiver(SmsBroadcastReceiver smsBroadcastReceiver, String sendPermission, IntentFilter intentFilter) {
+    }
 }
 
 
