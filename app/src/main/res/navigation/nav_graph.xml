@@ -40,7 +40,49 @@
         android:id="@+id/profileInfo"
         android:name="com.example.messageapp.ProfileInfo"
         android:label="Profile Info"
-        tools:layout="@layout/fragment_profile_info" />
+        tools:layout="@layout/fragment_profile_info" >
+        <action
+            android:id="@+id/action_profileInfo_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.messageapp.ChatFragment"
+        android:label="WhatsApp" >
+        <action
+            android:id="@+id/action_chatFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_linkedFragment"
+            app:destination="@id/linkedFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_starredFragment"
+            app:destination="@id/starredFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.messageapp.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_settingFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.messageapp.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/linkedFragment"
+        android:name="com.example.messageapp.LinkedFragment"
+        android:label="fragment_linked"
+        tools:layout="@layout/fragment_linked" />
+    <fragment
+        android:id="@+id/starredFragment"
+        android:name="com.example.messageapp.StarredFragment"
+        android:label="fragment_starred"
+        tools:layout="@layout/fragment_starred" />
 
 
 </navigation>

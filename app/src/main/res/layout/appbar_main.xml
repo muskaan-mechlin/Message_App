@@ -8,8 +8,11 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_700"
-        android:textAlignment="center"
+        android:background="@color/green"
+        android:backgroundTint="@color/green"
+        android:outlineSpotShadowColor="@color/white"
+        android:outlineAmbientShadowColor="@color/white"
+        android:textAlignment="textStart"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
 
 <!--        <com.google.android.material.appbar.MaterialToolbar-->

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".PhoneNumber"
-    android:background="@color/lightyellow"
+    android:background="@color/white"
     android:padding="15dp"
   >
 
@@ -28,9 +28,9 @@
         android:id="@+id/verify"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
-        android:text="WhataApp will need to verify your \n phone number."
+        android:text="    WhatsApp will need to verify your \n phone number."
         android:textSize="14dp"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/enter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -56,7 +56,7 @@
         android:hint="Code"
         app:hintTextColor="@color/black"
         android:textColorHint="@color/black"
-        app:boxBackgroundColor="@color/silver"
+        app:boxBackgroundColor="@color/white"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="1dp"
@@ -81,7 +81,7 @@
         android:hint="PhoneNumber"
         android:textColorHint="@color/black"
         app:hintTextColor="@color/black"
-        app:boxBackgroundColor="@color/silver"
+        app:boxBackgroundColor="@color/white"
         android:layout_marginTop="10dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/countryCode_picker">
@@ -114,7 +114,37 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/filledTextField" />
+      app:layout_constraintTop_toBottomOf="@id/filledTextField"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What's my number?"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/indigo"
+        android:textSize="14dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:layout_constraintTop_toBottomOf="@id/enter"
+        android:layout_marginTop="22dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="22dp"
+        />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/charges"
+        android:text="Carrier charges may apply"
+        app:layout_constraintTop_toBottomOf="@id/filledTextField1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"/>
 
 
 

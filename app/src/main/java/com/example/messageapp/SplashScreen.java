@@ -22,7 +22,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appbar_main);
 //        Toolbar toolbar = findViewById(R.id.toolbar);
-
+//
 //        setSupportActionBar(toolbar);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

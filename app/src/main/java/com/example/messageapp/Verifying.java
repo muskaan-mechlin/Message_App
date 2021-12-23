@@ -1,5 +1,6 @@
 package com.example.messageapp;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -31,6 +33,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,7 +47,8 @@ public class Verifying extends Fragment {
     String verificationId;
     CustomEditText edotp;
     SmsBroadcastReceiver smsBroadcastReceiver;
-
+    int requestcode,resultcode;
+    Intent data;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,9 @@ public class Verifying extends Fragment {
 
 
         startSmsUserConsent();
-        retrieveSms();
+
+        retrieveSms( requestcode,resultcode,data);
+
 
 
         wrobtn.setOnClickListener(new View.OnClickListener() {
@@ -134,33 +140,24 @@ public class Verifying extends Fragment {
         });
     }
 
-    public void retrieveSms() {
-        SmsRetrieverClient client = SmsRetriever.getClient(getActivity().getApplicationContext());
-        Task<Void> task = client.startSmsRetriever();
 
-        task.addOnSuccessListener(new OnSuccessListener<Void>() {
-            public void onSuccess(Void db) {
-                // Android will provide message once receive. Start your broadcast receiver.
-                IntentFilter filter = new IntentFilter();
-                filter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-                registerReceiver(new SmsBroadcastReceiver(), SmsRetriever.SEND_PERMISSION, filter);
-//                registerBroadcastReceiver();
-//                getOtpFromMessage(smsBroadcastReceiver.getResultData());
-                String message = SmsRetriever.EXTRA_SMS_MESSAGE;
+
+    public void retrieveSms(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQ_USER_CONSENT) {
+            if ((resultCode == RESULT_OK) && (data != null)) {
+                //That gives all message to us.
+                // We need to get the code from inside with regex
+                String message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
                 Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
 //                textViewMessage.setText(
 //                        String.format("%s - %s", getString(R.string.received_message), message));
                 getOtpFromMessage(message);
             }
-        });
-        task.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(Exception e) {
-                // Failed to start retriever, inspect Exception for more details
-            }
-        });
-
+        }
     }
+
+
 
 
     void getOtpFromMessage(String message) {
@@ -234,7 +231,7 @@ public class Verifying extends Fragment {
                             // if the code is correct and the task is successful
                             // we are sending our user to new activity.
                             Toast.makeText(getActivity().getApplicationContext(), "VERIFIED", Toast.LENGTH_LONG).show();
-                            Navigation.findNavController(getView()).navigate(R.id.action_verifying2_to_profileInfo);
+                            Navigation.findNavController(requireView()).navigate(R.id.action_verifying2_to_profileInfo);
 
                         } else {
                             // if the code is not correct then we are
@@ -310,7 +307,7 @@ public class Verifying extends Fragment {
         }
     };
 
-    private void verifyCode(String code) {
+         private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
 
         // after getting credential we are

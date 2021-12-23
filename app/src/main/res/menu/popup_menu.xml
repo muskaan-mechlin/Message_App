@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/one"
+        android:title="New group"
+        app:showAsAction="withText"
+
+       />
+
+    <item
+        android:id="@+id/two"
+        android:title="New broadcast"/>
+
+    <item
+        android:id="@+id/three"
+        android:title="Linked devices"/>
+
+
+    <item
+        android:id="@+id/four"
+        android:title="Starred messages"/>
+
+    <item
+        android:id="@+id/five"
+        android:title="Payments"/>
+
+    <item
+        android:id="@+id/six"
+        android:title="Settings"/>
+
+</menu>
