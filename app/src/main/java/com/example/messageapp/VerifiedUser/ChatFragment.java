@@ -1,4 +1,4 @@
-package com.example.messageapp;
+package com.example.messageapp.VerifiedUser;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import com.example.messageapp.R;
 
 
 public class ChatFragment extends Fragment {

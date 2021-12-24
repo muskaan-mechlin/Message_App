@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VerifiedUser.AccountFragment">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebutton"
+        android:src="@drawable/ic_baseline_lock_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview"
+        android:text="Privacy"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="35dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebutton1"
+        android:src="@drawable/ic_baseline_security_24"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview1"
+        android:text="Security"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="35dp"/>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebutton2"
+        android:src="@drawable/ic_baseline_more_horiz_24"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/silver"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview2"
+        android:text="Two-step verification"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textview1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="35dp"/>
+
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebutton3"
+        android:src="@drawable/ic_baseline_more_horiz_24"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/silver"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview3"
+        android:text="Change number"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textview2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="35dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebutton4"
+        android:src="@drawable/ic_baseline_more_horiz_24"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/silver"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview4"
+        android:text="Request account info"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textview3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="35dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebutton5"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="15dp"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview5"
+        android:text="Delete my account"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/textview4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="39dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

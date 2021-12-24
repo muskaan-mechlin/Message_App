@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigationSearchFragment"
-        android:name="com.example.messageapp.SearchFragment"
+        android:name="com.example.messageapp.Authentication.SearchFragment"
         android:label="Message App"
         tools:layout="@layout/fragment_search">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/phoneNumber"
-        android:name="com.example.messageapp.PhoneNumber"
+        android:name="com.example.messageapp.Authentication.PhoneNumber"
         android:label="Create Account"
         tools:layout="@layout/fragment_phone_number" >
 
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/verifying2"
-        android:name="com.example.messageapp.Verifying"
+        android:name="com.example.messageapp.Authentication.Verifying"
         android:label="Verification"
         tools:layout="@layout/fragment_verifying" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileInfo"
-        android:name="com.example.messageapp.ProfileInfo"
+        android:name="com.example.messageapp.Authentication.ProfileInfo"
         android:label="Profile Info"
         tools:layout="@layout/fragment_profile_info" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.messageapp.ChatFragment"
+        android:name="com.example.messageapp.VerifiedUser.ChatFragment"
         android:label="WhatsApp" >
         <action
             android:id="@+id/action_chatFragment_to_settingFragment"
@@ -61,28 +61,44 @@
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.messageapp.SettingFragment"
-        android:label="fragment_setting"
+        android:name="com.example.messageapp.VerifiedUser.SettingFragment"
+        android:label="Setting"
         tools:layout="@layout/fragment_setting" >
         <action
             android:id="@+id/action_settingFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_chat1Fragment"
+            app:destination="@id/chat1Fragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.messageapp.ProfileFragment"
-        android:label="fragment_profile"
+        android:name="com.example.messageapp.VerifiedUser.ProfileFragment"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/linkedFragment"
-        android:name="com.example.messageapp.LinkedFragment"
-        android:label="fragment_linked"
+        android:name="com.example.messageapp.VerifiedUser.LinkedFragment"
+        android:label="Linked devices"
         tools:layout="@layout/fragment_linked" />
     <fragment
         android:id="@+id/starredFragment"
-        android:name="com.example.messageapp.StarredFragment"
-        android:label="fragment_starred"
+        android:name="com.example.messageapp.VerifiedUser.StarredFragment"
+        android:label="Starred"
         tools:layout="@layout/fragment_starred" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.messageapp.VerifiedUser.AccountFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/chat1Fragment"
+        android:name="com.example.messageapp.VerifiedUser.Chat1Fragment"
+        android:label="fragment_chat1"
+        tools:layout="@layout/fragment_chat1" />
 
 
 </navigation>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ProfileInfo">
+    tools:context=".Authentication.ProfileInfo">
 
     <TextView
         android:layout_width="wrap_content"

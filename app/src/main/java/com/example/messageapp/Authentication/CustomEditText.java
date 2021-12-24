@@ -1,4 +1,4 @@
-package com.example.messageapp;
+package com.example.messageapp.Authentication;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.messageapp.R;
 
 public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText {
     public static final String XML_NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";

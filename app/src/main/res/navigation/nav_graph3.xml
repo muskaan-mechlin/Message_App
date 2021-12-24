@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph3"
+    app:startDestination="@id/chatFragment">
+
+
+        <fragment
+            android:id="@+id/chatFragment"
+            android:name="com.example.messageapp.VerifiedUser.ChatFragment"
+            android:label="WhatsApp" >
+            <action
+                android:id="@+id/action_chatFragment_to_settingFragment"
+                app:destination="@id/settingFragment" />
+            <action
+                android:id="@+id/action_chatFragment_to_linkedFragment"
+                app:destination="@id/linkedFragment" />
+            <action
+                android:id="@+id/action_chatFragment_to_starredFragment"
+                app:destination="@id/starredFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/settingFragment"
+            android:name="com.example.messageapp.VerifiedUser.SettingFragment"
+            android:label="Setting"
+            tools:layout="@layout/fragment_setting" >
+            <action
+                android:id="@+id/action_settingFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
+            <action
+                android:id="@+id/action_settingFragment_to_accountFragment"
+                app:destination="@id/accountFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.example.messageapp.VerifiedUser.ProfileFragment"
+            android:label="Profile"
+            tools:layout="@layout/fragment_profile" />
+        <fragment
+            android:id="@+id/linkedFragment"
+            android:name="com.example.messageapp.VerifiedUser.LinkedFragment"
+            android:label="Linked devices"
+            tools:layout="@layout/fragment_linked" />
+        <fragment
+            android:id="@+id/starredFragment"
+            android:name="com.example.messageapp.VerifiedUser.StarredFragment"
+            android:label="Starred"
+            tools:layout="@layout/fragment_starred" />
+        <fragment
+            android:id="@+id/accountFragment"
+            android:name="com.example.messageapp.VerifiedUser.AccountFragment"
+            android:label="Account"
+            tools:layout="@layout/fragment_account" />
+
+
+
+
+
+</navigation>

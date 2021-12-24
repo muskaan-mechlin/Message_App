@@ -1,4 +1,4 @@
-package com.example.messageapp;
+package com.example.messageapp.Authentication;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.messageapp.R.color.lightyellow;
@@ -29,6 +29,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.messageapp.Model;
+import com.example.messageapp.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

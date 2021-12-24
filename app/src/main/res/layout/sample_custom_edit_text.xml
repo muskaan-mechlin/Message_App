@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     >
 
-    <com.example.messageapp.CustomEditText
+    <com.example.messageapp.Authentication.CustomEditText
         android:id="@+id/et_otp"
         style="@style/Widget.Theme.MessageApp.MyView"
         android:layout_width="match_parent"
