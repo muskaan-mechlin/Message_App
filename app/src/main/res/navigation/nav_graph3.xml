@@ -31,6 +31,12 @@
             <action
                 android:id="@+id/action_settingFragment_to_accountFragment"
                 app:destination="@id/accountFragment" />
+            <action
+                android:id="@+id/action_settingFragment_to_notificationFragment"
+                app:destination="@id/notificationFragment" />
+            <action
+                android:id="@+id/action_settingFragment_to_chat1Fragment2"
+                app:destination="@id/chat1Fragment2" />
         </fragment>
         <fragment
             android:id="@+id/profileFragment"
@@ -52,9 +58,16 @@
             android:name="com.example.messageapp.VerifiedUser.AccountFragment"
             android:label="Account"
             tools:layout="@layout/fragment_account" />
-
-
-
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.messageapp.VerifiedUser.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/chat1Fragment2"
+        android:name="com.example.messageapp.VerifiedUser.Chat1Fragment"
+        android:label="fragment_chat1"
+        tools:layout="@layout/fragment_chat1" />
 
 
 </navigation>

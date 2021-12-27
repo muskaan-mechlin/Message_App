@@ -20,8 +20,8 @@ import com.example.messageapp.R;
 
 
 public class SettingFragment extends Fragment {
-  TextView profiletext,abouttext,acctextview,privatextview;
-  ImageButton profilebtn,keybutton,msgbtn;
+  TextView profiletext,abouttext,acctextview,privatextview,chatview,themeview;
+  ImageButton profilebtn,keybutton,msgbtn,notbtn,setbtn;
 
 
 
@@ -42,7 +42,12 @@ public class SettingFragment extends Fragment {
         acctextview = root.findViewById(R.id.textview2);
         privatextview = root.findViewById(R.id.textview3);
         keybutton = root.findViewById(R.id.imageview0);
+        chatview = root.findViewById(R.id.textview4);
+        themeview = root.findViewById(R.id.textview5);
         msgbtn = root.findViewById(R.id.imageview);
+        notbtn = root.findViewById(R.id.imageview1);
+        setbtn = root.findViewById(R.id.imageview2);
+
 //        ListAdapter adapter=new ListAdapter(getActivity(),maintitle, subtitle);
 
         profiletext.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +94,32 @@ public class SettingFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_chat1Fragment);
             }
         });
+        chatview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_chat1Fragment);
+            }
+        });
+        themeview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_chat1Fragment);
+            }
+        });
+               notbtn.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_notificationFragment2);
 
+                   }
+               });
+        setbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_storageFragment);
+
+            }
+        });
 
 
 

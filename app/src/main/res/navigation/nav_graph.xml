@@ -73,6 +73,12 @@
         <action
             android:id="@+id/action_settingFragment_to_chat1Fragment"
             app:destination="@id/chat1Fragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_notificationFragment2"
+            app:destination="@id/notificationFragment2" />
+        <action
+            android:id="@+id/action_settingFragment_to_storageFragment"
+            app:destination="@id/storageFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -99,6 +105,16 @@
         android:name="com.example.messageapp.VerifiedUser.Chat1Fragment"
         android:label="fragment_chat1"
         tools:layout="@layout/fragment_chat1" />
+    <fragment
+        android:id="@+id/notificationFragment2"
+        android:name="com.example.messageapp.VerifiedUser.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/storageFragment"
+        android:name="com.example.messageapp.VerifiedUser.StorageFragment"
+        android:label="fragment_storage"
+        tools:layout="@layout/fragment_storage" />
 
 
 </navigation>

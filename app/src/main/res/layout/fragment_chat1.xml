@@ -125,18 +125,186 @@
 
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Enter is send"
+                android:id="@+id/switchbutton"
+                android:text="Enter is send \n Enter key will send your \n message"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:layout_marginLeft="70dp"
+                android:textSize="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 app:layout_constraintTop_toBottomOf="@id/chat"
                 app:layout_constraintLeft_toLeftOf="parent"
                 tools:ignore="MissingConstraints"
+             android:gravity="left"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:id="@+id/switchbutton1"
+                android:text="Media visibility \n Show newly downloaded \n media in your phone's \n gallery"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintTop_toBottomOf="@id/switchbutton"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="MissingConstraints"
                 android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textview3"
+                android:text="Font size"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/switchbutton1"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textview0"
+                android:text="Font size"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="19dp"
+                app:layout_constraintTop_toBottomOf="@id/textview3"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/archieved"
+                android:text="Archieved chats"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/textview0"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:id="@+id/switchbutton2"
+                android:text="Keep chat archived \n Archived chats will \n remain archived when \n you recieve a new \n message"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintTop_toBottomOf="@id/archieved"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="MissingConstraints"
+                android:gravity="left"/>
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageview3"
+                android:src="@drawable/ic_baseline_language_24"
+                app:layout_constraintTop_toBottomOf="@id/switchbutton2"
+                android:layout_marginTop="35dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="18dp"
+                android:background="@color/white"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textview4"
+                android:text="App Language"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="95dp"
+                app:layout_constraintTop_toBottomOf="@id/switchbutton2"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                />
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageview4"
+                android:src="@drawable/ic_baseline_backup_24"
+                app:layout_constraintTop_toBottomOf="@id/textview4"
+                android:layout_marginTop="25dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="18dp"
+                android:background="@color/white"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textview5"
+                android:text="Chat backup"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="95dp"
+                app:layout_constraintTop_toBottomOf="@id/textview4"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageview6"
+                android:src="@drawable/ic_baseline_history_24"
+                app:layout_constraintTop_toBottomOf="@id/textview5"
+                android:layout_marginTop="25dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="18dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textview6"
+                android:text="Chat history"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="95dp"
+                app:layout_constraintTop_toBottomOf="@id/textview5"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                />
+
+
+
+
+
+
+
+
+
+
 
 
 
