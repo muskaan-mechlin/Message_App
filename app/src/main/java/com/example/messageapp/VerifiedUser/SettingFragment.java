@@ -20,8 +20,8 @@ import com.example.messageapp.R;
 
 
 public class SettingFragment extends Fragment {
-  TextView profiletext,abouttext,acctextview,privatextview,chatview,themeview;
-  ImageButton profilebtn,keybutton,msgbtn,notbtn,setbtn;
+  TextView profiletext,abouttext,acctextview,privatextview,chatview,themeview,notView,msgView,storageView,networkView,helpView,policyView,friendView;
+  ImageButton profilebtn,keybutton,msgbtn,notbtn,setbtn,helpbtn,friendbtn;
 
 
 
@@ -47,6 +47,15 @@ public class SettingFragment extends Fragment {
         msgbtn = root.findViewById(R.id.imageview);
         notbtn = root.findViewById(R.id.imageview1);
         setbtn = root.findViewById(R.id.imageview2);
+        helpbtn = root.findViewById(R.id.imageview3);
+        notView = root.findViewById(R.id.textview6);
+        msgView = root.findViewById(R.id.textview7);
+        storageView = root.findViewById(R.id.textview8);
+        networkView = root.findViewById(R.id.textview9);
+        helpView = root.findViewById(R.id.textview10);
+        policyView = root.findViewById(R.id.textview11);
+        friendView= root.findViewById(R.id.textview12);
+        friendbtn = root.findViewById(R.id.imageview4);
 
 //        ListAdapter adapter=new ListAdapter(getActivity(),maintitle, subtitle);
 
@@ -113,6 +122,18 @@ public class SettingFragment extends Fragment {
 
                    }
                });
+               notView.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_notificationFragment2);
+                   }
+               });
+               msgView.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_notificationFragment2);
+                   }
+               });
         setbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +141,51 @@ public class SettingFragment extends Fragment {
 
             }
         });
+        storageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_storageFragment);
 
+            }
+        });
+       networkView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_storageFragment);
+
+            }
+        });
+        helpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_helpFragment);
+            }
+        });
+        helpView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_helpFragment);
+            }
+        });
+        policyView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_helpFragment);
+            }
+        });
+          friendbtn.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_inviteFragment);
+              }
+          });
+
+        friendView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_inviteFragment);
+            }
+        });
 
 
         return  root;

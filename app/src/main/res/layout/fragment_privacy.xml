@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VerifiedUser.PrivacyFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview"
+        android:text="Who can see my personal info \n                                                                                                      If you don't share your Last Seen,you \nwon't be able to see other people's Last\nSeen"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/last"
+        android:text="Last seen"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textview"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="23dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seen"
+        android:text="Everyone"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/last"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profile"
+        android:text="Profile photo"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/seen"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="23dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/photo"
+        android:text="Everyone"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/profile"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/about"
+        android:text="About"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/photo"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="23dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/about1"
+        android:text="Everyone"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/about"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/status"
+        android:text="Status"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/about1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="23dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/status1"
+        android:text="Everyone"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/status"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:id="@+id/switchbutton"
+        android:text="Read receipts \n If turned off,you won't send or \n receive Read receipts.Read \n receipts are always sent for \n group chats."
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@id/status1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints"
+        android:gravity="left"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/group"
+                android:text = "Groups"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/switchbutton"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="23dp"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/group1"
+                android:text="Everyone"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/group"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/live"
+                android:text = "Live location"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/group1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="23dp"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/location"
+                android:text="None"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/live"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/blocked"
+                android:text = "Blocked contacts"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/location"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="23dp"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/contacts"
+                android:text="None"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/blocked"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

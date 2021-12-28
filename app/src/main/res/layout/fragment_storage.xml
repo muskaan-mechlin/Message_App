@@ -3,9 +3,192 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".VerifiedUser.StorageFragment">
 
+   <ImageButton
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/imagebtn"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:layout_marginTop="30dp"
+       android:layout_marginLeft="15dp"
+       android:src="@drawable/ic_baseline_folder_24"
+       android:background="@color/white"
+       />
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+      android:id="@+id/storage"
+      android:text="Manage storage"
+      android:textSize="15dp"
+      android:textColor="@color/black"
+      android:textStyle="bold"
+      android:layout_marginTop="37dp"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      android:layout_marginLeft="70dp"/>
 
 
+   <ImageButton
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/imagebtn1"
+       app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/storage"
+       android:layout_marginTop="30dp"
+       android:layout_marginLeft="15dp"
+       android:src="@drawable/ic_baseline_data_usage_24"
+       android:background="@color/white"
+       />
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/usage"
+       android:text="Network usage"
+       android:textSize="15dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="37dp"
+       app:layout_constraintTop_toBottomOf="@id/storage"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="70dp"/>
+
+
+   <com.google.android.material.switchmaterial.SwitchMaterial
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:checked="false"
+       android:id="@+id/switchbutton"
+       android:text="Use less data for calls"
+       android:textStyle="bold"
+       android:textColor="@color/black"
+       android:textSize="17dp"
+       android:layout_marginTop="29dp"
+       android:layout_marginLeft="40dp"
+       android:layout_marginRight="20dp"
+       app:layout_constraintTop_toBottomOf="@id/usage"
+       app:layout_constraintLeft_toLeftOf="parent"
+       tools:ignore="MissingConstraints"
+       android:gravity="left"/>
+
+   <View
+       android:layout_width="wrap_content"
+       android:layout_height="3dp"
+       android:id="@+id/view"
+      android:background="@color/gray_400"
+      app:layout_constraintTop_toBottomOf="@id/switchbutton"
+      app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/auto"
+       android:text="Media auto-download"
+       android:textSize="17dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="37dp"
+       app:layout_constraintTop_toBottomOf="@id/view"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="20dp"/>
+
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/voice"
+       android:text=" Voice messages are always \n automatically downloaded"
+       android:textSize="14dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="7dp"
+       app:layout_constraintTop_toBottomOf="@id/auto"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="20dp"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/mobile"
+       android:text="When using mobile data"
+       android:textSize="17dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="23dp"
+       app:layout_constraintTop_toBottomOf="@id/voice"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="55dp"/>
+
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/photos"
+       android:text="Photos"
+       android:textSize="14dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="3dp"
+       app:layout_constraintTop_toBottomOf="@id/mobile"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="55dp"/>
+
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/wifi"
+       android:text="When connected on wifi"
+       android:textSize="17dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="23dp"
+       app:layout_constraintTop_toBottomOf="@id/photos"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="55dp"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/media"
+       android:text="All media"
+       android:textSize="14dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="3dp"
+       app:layout_constraintTop_toBottomOf="@id/wifi"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="55dp"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/roam"
+       android:text="When roaming"
+       android:textSize="17dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="23dp"
+       app:layout_constraintTop_toBottomOf="@id/media"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="55dp"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/nomedia"
+       android:text="No media"
+       android:textSize="14dp"
+       android:textColor="@color/black"
+       android:textStyle="bold"
+       android:layout_marginTop="3dp"
+       app:layout_constraintTop_toBottomOf="@id/roam"
+       app:layout_constraintLeft_toLeftOf="parent"
+       android:layout_marginLeft="55dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,12 +88,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imagebutton3"
-        android:src="@drawable/ic_baseline_more_horiz_24"
+        android:src="@drawable/ic_baseline_send_to_mobile_24"
         app:layout_constraintTop_toBottomOf="@id/imagebutton2"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="28dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/silver"/>
+        android:background="@color/white"/>
 
 
     <TextView
@@ -113,12 +113,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imagebutton4"
-        android:src="@drawable/ic_baseline_more_horiz_24"
+        android:src="@drawable/ic_baseline_sticky_note_2_24"
         app:layout_constraintTop_toBottomOf="@id/imagebutton3"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="28dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/silver"/>
+        android:background="@color/white"/>
 
 
     <TextView

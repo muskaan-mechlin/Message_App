@@ -79,6 +79,12 @@
         <action
             android:id="@+id/action_settingFragment_to_storageFragment"
             app:destination="@id/storageFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_helpFragment"
+            app:destination="@id/helpFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_inviteFragment"
+            app:destination="@id/inviteFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -99,7 +105,26 @@
         android:id="@+id/accountFragment"
         android:name="com.example.messageapp.VerifiedUser.AccountFragment"
         android:label="Account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_securityFragment"
+            app:destination="@id/securityFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_twoStepFragment"
+            app:destination="@id/twoStepFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_numberFragment"
+            app:destination="@id/numberFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_requestFragment"
+            app:destination="@id/requestFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_deleteFragment"
+            app:destination="@id/deleteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chat1Fragment"
         android:name="com.example.messageapp.VerifiedUser.Chat1Fragment"
@@ -115,6 +140,46 @@
         android:name="com.example.messageapp.VerifiedUser.StorageFragment"
         android:label="fragment_storage"
         tools:layout="@layout/fragment_storage" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.example.messageapp.VerifiedUser.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/inviteFragment"
+        android:name="com.example.messageapp.VerifiedUser.InviteFragment"
+        android:label="fragment_invite"
+        tools:layout="@layout/fragment_invite" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.example.messageapp.VerifiedUser.PrivacyFragment"
+        android:label="fragment_privacy"
+        tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/securityFragment"
+        android:name="com.example.messageapp.VerifiedUser.SecurityFragment"
+        android:label="fragment_security"
+        tools:layout="@layout/fragment_security" />
+    <fragment
+        android:id="@+id/twoStepFragment"
+        android:name="com.example.messageapp.VerifiedUser.TwoStepFragment"
+        android:label="fragment_two_step"
+        tools:layout="@layout/fragment_two_step" />
+    <fragment
+        android:id="@+id/numberFragment"
+        android:name="com.example.messageapp.VerifiedUser.NumberFragment"
+        android:label="fragment_number"
+        tools:layout="@layout/fragment_number" />
+    <fragment
+        android:id="@+id/requestFragment"
+        android:name="com.example.messageapp.VerifiedUser.RequestFragment"
+        android:label="fragment_request"
+        tools:layout="@layout/fragment_request" />
+    <fragment
+        android:id="@+id/deleteFragment"
+        android:name="com.example.messageapp.VerifiedUser.DeleteFragment"
+        android:label="fragment_delete"
+        tools:layout="@layout/fragment_delete" />
 
 
 </navigation>
