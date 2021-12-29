@@ -35,8 +35,20 @@
                 android:id="@+id/action_settingFragment_to_notificationFragment"
                 app:destination="@id/notificationFragment" />
             <action
-                android:id="@+id/action_settingFragment_to_chat1Fragment2"
-                app:destination="@id/chat1Fragment2" />
+                android:id="@+id/action_settingFragment_to_chat1Fragment"
+                app:destination="@id/chat1Fragment" />
+            <action
+                        android:id="@+id/action_settingFragment_to_notificationFragment2"
+                        app:destination="@id/notificationFragment2" />
+                    <action
+                        android:id="@+id/action_settingFragment_to_storageFragment"
+                        app:destination="@id/storageFragment" />
+                    <action
+                        android:id="@+id/action_settingFragment_to_helpFragment"
+                        app:destination="@id/helpFragment" />
+                    <action
+                        android:id="@+id/action_settingFragment_to_inviteFragment"
+                        app:destination="@id/inviteFragment" />
         </fragment>
         <fragment
             android:id="@+id/profileFragment"
@@ -57,17 +69,118 @@
             android:id="@+id/accountFragment"
             android:name="com.example.messageapp.VerifiedUser.AccountFragment"
             android:label="Account"
-            tools:layout="@layout/fragment_account" />
+            tools:layout="@layout/fragment_account" >
+    <action
+        android:id="@+id/action_accountFragment_to_privacyFragment"
+        app:destination="@id/privacyFragment" />
+    <action
+        android:id="@+id/action_accountFragment_to_securityFragment"
+        app:destination="@id/securityFragment" />
+    <action
+        android:id="@+id/action_accountFragment_to_twoStepFragment"
+        app:destination="@id/twoStepFragment" />
+    <action
+        android:id="@+id/action_accountFragment_to_numberFragment"
+        app:destination="@id/numberFragment" />
+    <action
+        android:id="@+id/action_accountFragment_to_requestFragment"
+        app:destination="@id/requestFragment" />
+    <action
+        android:id="@+id/action_accountFragment_to_deleteFragment"
+        app:destination="@id/deleteFragment" />
+        </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.example.messageapp.VerifiedUser.NotificationFragment"
         android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
-    <fragment
-        android:id="@+id/chat1Fragment2"
-        android:name="com.example.messageapp.VerifiedUser.Chat1Fragment"
-        android:label="fragment_chat1"
-        tools:layout="@layout/fragment_chat1" />
+        tools:layout="@layout/fragment_notification" >
 
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/chat1Fragment2"-->
+<!--        android:name="com.example.messageapp.VerifiedUser.Chat1Fragment"-->
+<!--        android:label="fragment_chat1"-->
+<!--        tools:layout="@layout/fragment_chat1" />-->
+    <fragment
+            android:id="@+id/chat1Fragment"
+            android:name="com.example.messageapp.VerifiedUser.Chat1Fragment"
+            android:label="Chats"
+            tools:layout="@layout/fragment_chat1" >
+        <action
+            android:id="@+id/action_chat1Fragment_to_backupFragment"
+            app:destination="@id/backupFragment" />
+        <action
+            android:id="@+id/action_chat1Fragment_to_chathistoryFragment"
+            app:destination="@id/chathistoryFragment" />
+    </fragment>
+        <fragment
+            android:id="@+id/notificationFragment2"
+            android:name="com.example.messageapp.VerifiedUser.NotificationFragment"
+            android:label="Notifications"
+            tools:layout="@layout/fragment_notification" />
+        <fragment
+            android:id="@+id/storageFragment"
+            android:name="com.example.messageapp.VerifiedUser.StorageFragment"
+            android:label="Storage"
+            tools:layout="@layout/fragment_storage" />
+        <fragment
+            android:id="@+id/helpFragment"
+            android:name="com.example.messageapp.VerifiedUser.HelpFragment"
+            android:label="Help"
+            tools:layout="@layout/fragment_help" >
+            <action
+                android:id="@+id/action_helpFragment_to_contactFragment"
+                app:destination="@id/contactFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/inviteFragment"
+            android:name="com.example.messageapp.VerifiedUser.InviteFragment"
+            android:label="Invite a friend"
+            tools:layout="@layout/fragment_invite" />
+        <fragment
+            android:id="@+id/privacyFragment"
+            android:name="com.example.messageapp.VerifiedUser.PrivacyFragment"
+            android:label="Privacy"
+            tools:layout="@layout/fragment_privacy" />
+        <fragment
+            android:id="@+id/securityFragment"
+            android:name="com.example.messageapp.VerifiedUser.SecurityFragment"
+            android:label="Security"
+            tools:layout="@layout/fragment_security" />
+        <fragment
+            android:id="@+id/twoStepFragment"
+            android:name="com.example.messageapp.VerifiedUser.TwoStepFragment"
+            android:label="Two-step verification"
+            tools:layout="@layout/fragment_two_step" />
+        <fragment
+            android:id="@+id/numberFragment"
+            android:name="com.example.messageapp.VerifiedUser.NumberFragment"
+            android:label="Change number"
+            tools:layout="@layout/fragment_number" />
+        <fragment
+            android:id="@+id/requestFragment"
+            android:name="com.example.messageapp.VerifiedUser.RequestFragment"
+            android:label="Request account info"
+            tools:layout="@layout/fragment_request" />
+        <fragment
+            android:id="@+id/deleteFragment"
+            android:name="com.example.messageapp.VerifiedUser.DeleteFragment"
+            android:label="Delete my account"
+            tools:layout="@layout/fragment_delete" />
+    <fragment
+        android:id="@+id/backupFragment"
+        android:name="com.example.messageapp.VerifiedUser.BackupFragment"
+        android:label="Chat backup"
+        tools:layout="@layout/fragment_backup" />
+    <fragment
+        android:id="@+id/chathistoryFragment"
+        android:name="com.example.messageapp.VerifiedUser.ChathistoryFragment"
+        android:label="Chat history"
+        tools:layout="@layout/fragment_chathistory" />
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.example.messageapp.VerifiedUser.ContactFragment"
+        android:label="Contact us"
+        tools:layout="@layout/fragment_contact" />
 
 </navigation>

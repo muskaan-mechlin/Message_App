@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_add_to_drive_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_archive_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_backup_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_brightness_6_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.2203125" />
@@ -28,25 +31,32 @@
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_people_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_people_alt_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_phonelink_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_remove_circle_outline_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_security_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_send_to_mobile_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_space_bar_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_stars_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_sticky_note_2_24.xml" value="0.2203125" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_straight_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/ic_baseline_wallpaper_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/iic_baseline_sticky_note_2_24.xml" value="0.2203125" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/drawable/roundcorner.xml" value="0.22" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/activity_authentication.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/activity_verified_user.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/appbar_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/content_authentication.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/content_verified_user.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_account.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_backup.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_chat.xml" value="0.22" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_chat1.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_chathistory.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_contact.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_delete.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_help.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kunal/AndroidStudioProjects/MessageApp/app/src/main/res/layout/fragment_invite.xml" value="0.20416666666666666" />

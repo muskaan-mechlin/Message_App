@@ -35,7 +35,7 @@ public class SearchFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_navigationSearchFragment_to_phoneNumber);
+                Navigation.findNavController(view).navigate(R.id.action_navigationSearchFragment_to_nav_graph22);
             }
         });
 

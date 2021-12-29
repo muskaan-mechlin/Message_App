@@ -52,7 +52,7 @@ public class ProfileInfo extends Fragment {
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_profileInfo_to_chatFragment);
+                Navigation.findNavController(view).navigate(R.id.action_profileInfo_to_nav_graph3);
 
             }
         });

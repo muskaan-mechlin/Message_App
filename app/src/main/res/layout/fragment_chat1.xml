@@ -65,7 +65,7 @@
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginRight="15dp"
                 app:layout_constraintTop_toBottomOf="@id/textview"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -235,9 +235,24 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:textColor="@color/black"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="95dp"
                 app:layout_constraintTop_toBottomOf="@id/switchbutton2"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textview4.1"
+                android:text="App Language"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="95dp"
+                app:layout_constraintTop_toBottomOf="@id/textview4"
                 app:layout_constraintLeft_toLeftOf="parent"
 
                 />
@@ -248,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imageview4"
                 android:src="@drawable/ic_baseline_backup_24"
-                app:layout_constraintTop_toBottomOf="@id/textview4"
+                app:layout_constraintTop_toBottomOf="@id/textview4.1"
                 android:layout_marginTop="25dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="18dp"
@@ -263,9 +278,9 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:textColor="@color/black"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="95dp"
-                app:layout_constraintTop_toBottomOf="@id/textview4"
+                app:layout_constraintTop_toBottomOf="@id/textview4.1"
                 app:layout_constraintLeft_toLeftOf="parent"
 
                 />
@@ -276,7 +291,7 @@
                 android:id="@+id/imageview6"
                 android:src="@drawable/ic_baseline_history_24"
                 app:layout_constraintTop_toBottomOf="@id/textview5"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="23dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="18dp"
                 android:background="@color/white"/>
