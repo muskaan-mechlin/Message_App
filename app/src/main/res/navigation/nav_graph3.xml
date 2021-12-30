@@ -54,7 +54,14 @@
             android:id="@+id/profileFragment"
             android:name="com.example.messageapp.VerifiedUser.ProfileFragment"
             android:label="Profile"
-            tools:layout="@layout/fragment_profile" />
+            tools:layout="@layout/fragment_profile" >
+            <action
+                android:id="@+id/action_profileFragment_to_aboutFragment"
+                app:destination="@id/aboutFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_numberFragment"
+                app:destination="@id/numberFragment" />
+        </fragment>
         <fragment
             android:id="@+id/linkedFragment"
             android:name="com.example.messageapp.VerifiedUser.LinkedFragment"
@@ -182,5 +189,10 @@
         android:name="com.example.messageapp.VerifiedUser.ContactFragment"
         android:label="Contact us"
         tools:layout="@layout/fragment_contact" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.messageapp.VerifiedUser.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 
 </navigation>

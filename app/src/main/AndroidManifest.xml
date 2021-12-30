@@ -24,9 +24,10 @@
         android:theme="@style/Theme.MessageApp">
         <activity
             android:name=".VerifiedUserActivity"
-            android:exported="true"
             android:label="@string/title_activity_verified_user"
-            android:theme="@style/Theme.MessageApp.NoActionBar" />
+            android:theme="@style/Theme.MessageApp.NoActionBar"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".AuthenticationActivity"
             android:exported="true"

@@ -130,7 +130,7 @@
         app:layout_constraintTop_toBottomOf="@id/enter"
         android:layout_marginTop="22dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="15dp"
         />
     
     <TextView
