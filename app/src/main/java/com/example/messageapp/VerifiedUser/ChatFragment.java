@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,9 +20,21 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 
 public class ChatFragment extends Fragment {
+
+    //This is our tablayout
+    private TabLayout tabLayout;
+
+    //This is our viewPager
+    private ViewPager2 viewPager;
+
+    ViewPagerAdapter viewPagerAdapter;
+    private final ArrayList<Fragment> arrayList = new ArrayList<>();
 
 
     @Override
@@ -37,8 +50,59 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
+        //Initializing the tablayout
+        tabLayout = (TabLayout) root.findViewById(R.id.tablayout);
+
+        //Adding the tabs using addTab() method
+
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_baseline_camera_alt_24));
+//        tabLayout.addTab(tabLayout.newTab().setText("Chats"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Status"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Calls"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+//        //Initializing viewPager
+        viewPager = (ViewPager2) root.findViewById(R.id.viewpager);
+        // add Fragments in your ViewPagerFragmentAdapter class
+        arrayList.add(new CameraFragment());
+        arrayList.add(new Chats());
+        arrayList.add(new Status());
+        arrayList.add(new Calls());
+//
+     viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), getLifecycle());
+        // set Orientation in your ViewPager2
+        viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+
+        viewPager.setAdapter(viewPagerAdapter);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
+
+
         return root;
     }
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

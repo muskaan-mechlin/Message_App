@@ -1,5 +1,8 @@
 package com.example.messageapp.VerifiedUser;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -21,6 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class ProfileFragment extends Fragment {
     ImageButton nameBtn,aboutBtn,phoneBtn;
+    TextInputEditText aboutEt,nameEt;
 
 
 
@@ -38,6 +42,16 @@ public class ProfileFragment extends Fragment {
         nameBtn = root.findViewById(R.id.imagebtn1);
         aboutBtn = root.findViewById(R.id.imagebtn3);
         phoneBtn = root.findViewById(R.id.imagebtn5);
+        aboutEt = root.findViewById(R.id.about);
+        nameEt = root.findViewById(R.id.name);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String username = sharedPreferences.getString("name", "");
+
+       nameEt.setText(username);
+
+
+
 
         nameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +73,11 @@ public class ProfileFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_numberFragment);
             }
         });
+        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String status = sharedPreferences1.getString("About", "");
+
+        aboutEt.setText(status);
+
         return root;
     }
 

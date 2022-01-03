@@ -161,4 +161,43 @@
         app:layout_constraintTop_toBottomOf="@id/textview9"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="12dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview11"
+        android:text="At the gym"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textview10"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="12dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview12"
+        android:text="Sleeping"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textview11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="12dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview13"
+        android:text="Urgent calls only"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textview12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="12dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
