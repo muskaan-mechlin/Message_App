@@ -19,6 +19,9 @@
             <action
                 android:id="@+id/action_chatFragment_to_starredFragment"
                 app:destination="@id/starredFragment" />
+            <action
+                android:id="@+id/action_chatFragment_to_chats"
+                app:destination="@id/chats" />
         </fragment>
         <fragment
             android:id="@+id/settingFragment"
@@ -194,5 +197,19 @@
         android:name="com.example.messageapp.VerifiedUser.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/chats"
+        android:name="com.example.messageapp.VerifiedUser.Chats"
+        android:label="fragment_chats"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chats_to_contactListFragment"
+            app:destination="@id/contactListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactListFragment"
+        android:name="com.example.messageapp.VerifiedUser.ContactListFragment"
+        android:label="fragment_contact_list"
+        tools:layout="@layout/fragment_contact_list" />
 
 </navigation>

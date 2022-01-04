@@ -60,6 +60,9 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
 
 
+    implementation 'com.karumi:dexter:6.2.2'
+
+
 
     dependencies {
         // Import the Firebase BoM

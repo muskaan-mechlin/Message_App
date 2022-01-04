@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph2"
-    app:startDestination="@id/phoneNumber">
+    app:startDestination="@id/searchFragment">
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigationSearchFragment"-->
-<!--        android:name="com.example.messageapp.Authentication.SearchFragment"-->
-<!--        android:label="Message App"-->
-<!--        tools:layout="@layout/fragment_search">-->
-<!--        <action-->
-<!--            android:id="@+id/action_navigationSearchFragment_to_phoneNumber"-->
-<!--            app:destination="@id/phoneNumber" />-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.messageapp.Authentication.SearchFragment"
+        android:label="."
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_phoneNumber"
+            app:destination="@id/phoneNumber" />
+    </fragment>
     <fragment
         android:id="@+id/phoneNumber"
         android:name="com.example.messageapp.Authentication.PhoneNumber"

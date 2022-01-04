@@ -50,7 +50,7 @@ public class ProfileInfo extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_profile_info, container, false);
-        btn = (ImageButton) root.findViewById(R.id.image);
+        btn = root.findViewById(R.id.image);
         imageView = root.findViewById(R.id.imageview);
         nextbutton = root.findViewById(R.id.nextbtn);
         nameEt = root.findViewById(R.id.edittext);

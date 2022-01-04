@@ -3,21 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigationSearchFragment">
+    app:startDestination="@id/navigationMainScreen">
 
     <fragment
-        android:id="@+id/navigationSearchFragment"
-        android:name="com.example.messageapp.Authentication.SearchFragment"
+        android:id="@+id/navigationMainScreen"
+        android:name="com.example.messageapp.MainScreen"
         android:label="Message App"
-        tools:layout="@layout/fragment_search">
-        <action
-            android:id="@+id/action_navigationSearchFragment_to_phoneNumber"
-            app:destination="@id/phoneNumber" />
-        <action
-            android:id="@+id/action_navigationSearchFragment_to_nav_graph22"
-            app:destination="@id/nav_graph2" />
+        tools:layout="@layout/fragment_main_screen" >
 
+        <action
+            android:id="@+id/action_mainScreen_to_searchFragment"
+            app:destination="@+id/searchFragment"
+            />
+        <action
+            android:id="@+id/action_navigationMainScreen_to_nav_graph2"
+            app:destination="@id/nav_graph2" />
     </fragment>
+
+
+
+
 <!--    <fragment-->
 <!--        android:id="@+id/phoneNumber"-->
 <!--        android:name="com.example.messageapp.Authentication.PhoneNumber"-->
@@ -189,6 +194,7 @@
 <!--        tools:layout="@layout/fragment_delete" />-->
 
                 <include app:graph="@navigation/nav_graph2" />
+
 
 
 </navigation>

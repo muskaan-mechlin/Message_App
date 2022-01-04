@@ -51,7 +51,7 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
         //Initializing the tablayout
-        tabLayout = (TabLayout) root.findViewById(R.id.tablayout);
+        tabLayout = root.findViewById(R.id.tablayout);
 
         //Adding the tabs using addTab() method
 
@@ -62,7 +62,7 @@ public class ChatFragment extends Fragment {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 //        //Initializing viewPager
-        viewPager = (ViewPager2) root.findViewById(R.id.viewpager);
+        viewPager = root.findViewById(R.id.viewpager);
         // add Fragments in your ViewPagerFragmentAdapter class
         arrayList.add(new CameraFragment());
         arrayList.add(new Chats());

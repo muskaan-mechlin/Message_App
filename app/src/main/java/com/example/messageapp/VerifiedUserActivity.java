@@ -18,14 +18,14 @@ import com.example.messageapp.databinding.ActivityVerifiedUserBinding;
 public class VerifiedUserActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityVerifiedUserBinding binding;
+//    private ActivityVerifiedUserBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityVerifiedUserBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+//        binding = ActivityVerifiedUserBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
 
 //        setSupportActionBar(binding.toolbar);
 
@@ -41,12 +41,12 @@ public class VerifiedUserActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
-
+//
 //    @Override
 //    public boolean onSupportNavigateUp() {
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_verified_user);
 //        return NavigationUI.navigateUp(navController, appBarConfiguration)
 //                || super.onSupportNavigateUp();
-//    }
+
     }
 }
