@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,9 @@ import com.google.android.material.textfield.TextInputEditText;
 
 
 public class ProfileFragment extends Fragment {
+    private static final String TAG = "ProfileFragment";
     ImageButton nameBtn,aboutBtn,phoneBtn;
-    TextInputEditText aboutEt,nameEt;
+    TextInputEditText aboutEt,nameEt,phoneEt;
 
 
 
@@ -44,11 +46,24 @@ public class ProfileFragment extends Fragment {
         phoneBtn = root.findViewById(R.id.imagebtn5);
         aboutEt = root.findViewById(R.id.about);
         nameEt = root.findViewById(R.id.name);
+        phoneEt = root.findViewById(R.id.phone);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
         String username = sharedPreferences.getString("name", "");
 
        nameEt.setText(username);
+
+        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String phonenumber = sharedPreferences1.getString("phonenumber", "");
+
+       phoneEt.setText(phonenumber);
+
+        SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String status = sharedPreferences2.getString("about", "");
+
+        aboutEt.setText(status);
+        Log.d(TAG, "onCreateView: "+status);
+        Log.d(TAG, "onCreateView: "+aboutEt);
 
 
 
@@ -73,10 +88,6 @@ public class ProfileFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_numberFragment);
             }
         });
-        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
-        String status = sharedPreferences1.getString("About", "");
-
-        aboutEt.setText(status);
 
         return root;
     }

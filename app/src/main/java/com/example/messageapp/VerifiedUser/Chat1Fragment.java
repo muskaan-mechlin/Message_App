@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,6 +115,15 @@ public class Chat1Fragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 //                       fontView.setText("Selected Item is : " + listItems[which]);
+                       if ( listItems.equals("Light")){
+                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        }
+                       else{
+                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+                       }
+
+
                         fontView.setText("Selected Item is" + listItems[which]);
                         Toast.makeText(getActivity().getApplicationContext(), "Position: " + which + " Value: " + listItems[which], Toast.LENGTH_LONG).show();
                     }
@@ -126,9 +137,10 @@ public class Chat1Fragment extends Fragment {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+//                        dialog.dismiss();
                     }
                 });
+
 
                 AlertDialog dialog = builder.create();
                 dialog.show();

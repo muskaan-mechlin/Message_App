@@ -1,12 +1,16 @@
 package com.example.messageapp.VerifiedUser;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +24,8 @@ import com.example.messageapp.R;
 
 
 public class SettingFragment extends Fragment {
-  TextView profiletext,abouttext,acctextview,privatextview,chatview,themeview,notView,msgView,storageView,networkView,helpView,policyView,friendView;
+    private static final String TAG = "SettingFragment";
+    TextView profiletext,abouttext,acctextview,privatextview,chatview,themeview,notView,msgView,storageView,networkView,helpView,policyView,friendView;
   ImageButton profilebtn,keybutton,msgbtn,notbtn,setbtn,helpbtn,friendbtn;
 
 
@@ -56,6 +61,15 @@ public class SettingFragment extends Fragment {
         policyView = root.findViewById(R.id.textview11);
         friendView= root.findViewById(R.id.textview12);
         friendbtn = root.findViewById(R.id.imageview4);
+
+        SharedPreferences sharedPreferences2 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String status = sharedPreferences2.getString("about", "");
+
+        abouttext.setText(status);
+        Log.d(TAG, "onCreateView: "+status);
+
+
+
 
 //        ListAdapter adapter=new ListAdapter(getActivity(),maintitle, subtitle);
 

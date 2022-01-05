@@ -163,7 +163,7 @@
         android:layout_marginLeft="62dp"
         app:hintTextColor="@color/black"
         android:textColorHint="@color/black"
-        android:hint="About">
+        android:hint="PhoneNumber">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone"

@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
     class ContactRVAdapter extends RecyclerView.Adapter<ContactRVAdapter.ViewHolder> {
 
         // creating variables for context and array list.
-        private Context context;
+        private final Context context;
         private ArrayList<ContactsModal> contactsModalArrayList;
 
         // creating a constructor
@@ -92,8 +92,8 @@ import androidx.recyclerview.widget.RecyclerView;
         public class ViewHolder extends RecyclerView.ViewHolder {
             // on below line creating a variable
             // for our image view and text view.
-            private ImageView contactIV;
-            private TextView contactTV;
+            private final ImageView contactIV;
+            private final TextView contactTV;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);

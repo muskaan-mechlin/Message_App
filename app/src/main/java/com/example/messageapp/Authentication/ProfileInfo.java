@@ -54,16 +54,19 @@ public class ProfileInfo extends Fragment {
         imageView = root.findViewById(R.id.imageview);
         nextbutton = root.findViewById(R.id.nextbtn);
         nameEt = root.findViewById(R.id.edittext);
+
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  showBottomSheetDialog();
             }
         });
-        detailsPhone();
+
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                detailsPhone();
                 Navigation.findNavController(view).navigate(R.id.action_profileInfo_to_nav_graph3);
 
             }

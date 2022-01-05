@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,6 +33,15 @@ public class MainScreen extends Fragment {
         imageView = root.findViewById(R.id.imageview);
         constraintLayout = root.findViewById(R.id.constraint);
 
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                Navigation.findNavController(getView()).navigate(R.id.action_navigationMainScreen_to_nav_graph2);
+            }
+        }, 7000);
+
       constraintLayout.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -53,4 +63,5 @@ public class MainScreen extends Fragment {
 //            }
 //        });
    return root; }
+
 }

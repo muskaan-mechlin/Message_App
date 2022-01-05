@@ -105,6 +105,7 @@ public class PhoneNumber extends Fragment {
 
 
 
+
     public void detailsPhone() {
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
