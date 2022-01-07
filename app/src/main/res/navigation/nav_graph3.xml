@@ -22,6 +22,12 @@
             <action
                 android:id="@+id/action_chatFragment_to_chats"
                 app:destination="@id/chats" />
+            <action
+                android:id="@+id/action_chatFragment_to_groupFragment"
+                app:destination="@id/groupFragment" />
+            <action
+                android:id="@+id/action_chatFragment_to_broadcastFragment"
+                app:destination="@id/broadcastFragment" />
         </fragment>
         <fragment
             android:id="@+id/settingFragment"
@@ -202,6 +208,7 @@
         android:name="com.example.messageapp.VerifiedUser.Chats"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_chats" >
+
         <action
             android:id="@+id/action_chats_to_contactListFragment"
             app:destination="@id/contactListFragment" />
@@ -209,7 +216,17 @@
     <fragment
         android:id="@+id/contactListFragment"
         android:name="com.example.messageapp.VerifiedUser.ContactListFragment"
-        android:label="fragment_contact_list"
-        tools:layout="@layout/fragment_contact_list" />
+        android:label="Contacts"
+        tools:layout="@layout/fragment_contact_list2" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.example.messageapp.VerifiedUser.GroupFragment"
+        android:label="New Group"
+        tools:layout="@layout/fragment_group" />
+    <fragment
+        android:id="@+id/broadcastFragment"
+        android:name="com.example.messageapp.VerifiedUser.BroadcastFragment"
+        android:label="New Broadcast"
+        tools:layout="@layout/fragment_broadcast" />
 
 </navigation>

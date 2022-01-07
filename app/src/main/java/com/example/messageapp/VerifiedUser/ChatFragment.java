@@ -139,7 +139,17 @@ public class ChatFragment extends Fragment {
                             Navigation.findNavController(getView()).navigate(R.id.action_chatFragment_to_starredFragment);
                             return true;
                         }
+                        if (id == R.id.one) {
+                            Navigation.findNavController(getView()).navigate(R.id.action_chatFragment_to_groupFragment);
+                            return true;
 
+                        }
+
+                        if (id == R.id.two) {
+                            Navigation.findNavController(getView()).navigate(R.id.action_chatFragment_to_broadcastFragment);
+                            return true;
+
+                        }
 
                         return true;
                     }

@@ -1,11 +1,13 @@
 package com.example.messageapp.VerifiedUser;
 
-import android.Manifest;
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -19,25 +21,33 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 
+public class BroadcastFragment extends Fragment {
 
-public class ContactListFragment extends Fragment {
+    TextView phonetextView;
+
     public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     MyCustomAdapter dataAdapter = null;
     ListView listView;
-    Button btnGetContacts;
+    FloatingActionButton fab;
+
     List<ContactsInfo> contactsInfoList;
+    ChipGroup chipGroup;
+
+
+
 
 
     @Override
@@ -50,20 +60,52 @@ public class ContactListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_contact_list2, container, false);
+        View root = inflater.inflate(R.layout.fragment_broadcast, container, false);
 
-        btnGetContacts = root.findViewById(R.id.btnGetContacts);
-        listView = root.findViewById(R.id.lstContacts);
+        listView = root.findViewById(R.id.list);
+        phonetextView = root.findViewById(R.id.textview1);
         listView.setAdapter(dataAdapter);
+        fab = root.findViewById(R.id.floating_action_button);
+        chipGroup = root.findViewById(R.id.chip_group);
 
-        btnGetContacts.setOnClickListener(new View.OnClickListener() {
+        chipGroup.setSingleLine(false);
+
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                for (int i1 = 0; i1 < chipGroup.getChildCount(); i1++) {
+//                    Chip chip = (Chip)chipGroup.getChildAt(i1);
+//
+//                    for (int index = 0; index < contactsInfoList.size(); index++) {
+//
+//                        chip.setText((CharSequence) contactsInfoList.get(index));
+//                    }
+//                }
+//            }
+//        });
+
+
+
+
+
+        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String phonenumber = sharedPreferences1.getString("phonenumber", "");
+
+        phonetextView.setText("+91 " + phonenumber);
+
+
+        requestContactPermission();
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                requestContactPermission();
+            public void onClick(View view) {
+                Toast.makeText(getActivity().getApplicationContext(),"At least 2 contacts must be selected",Toast.LENGTH_SHORT).show();
+
             }
         });
-    return root;}
 
+
+        return root; }
     @SuppressLint("Range")
     private void getContacts(){
         ContentResolver contentResolver = getActivity().getApplicationContext().getContentResolver();
@@ -111,7 +153,7 @@ public class ContactListFragment extends Fragment {
 
     public void requestContactPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getView().getContext(), android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                         android.Manifest.permission.READ_CONTACTS)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getView().getContext());
@@ -158,9 +200,3 @@ public class ContactListFragment extends Fragment {
         }
     }
 }
-
-
-
-
-
-

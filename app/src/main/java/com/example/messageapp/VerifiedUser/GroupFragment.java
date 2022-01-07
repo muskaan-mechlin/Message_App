@@ -1,6 +1,5 @@
 package com.example.messageapp.VerifiedUser;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -19,25 +18,26 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactListFragment extends Fragment {
+public class GroupFragment extends Fragment {
     public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    FloatingActionButton fab;
     MyCustomAdapter dataAdapter = null;
     ListView listView;
-    Button btnGetContacts;
+
     List<ContactsInfo> contactsInfoList;
+
+
 
 
     @Override
@@ -50,20 +50,24 @@ public class ContactListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_contact_list2, container, false);
-
-        btnGetContacts = root.findViewById(R.id.btnGetContacts);
-        listView = root.findViewById(R.id.lstContacts);
+       View root = inflater.inflate(R.layout.fragment_group, container, false);
+//        btnGetContacts = (Button) root.findViewById(R.id.btnGetContacts);
+        listView = root.findViewById(R.id.list);
+        fab = root.findViewById(R.id.floating_action_button);
         listView.setAdapter(dataAdapter);
 
-        btnGetContacts.setOnClickListener(new View.OnClickListener() {
+        requestContactPermission();
+
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                requestContactPermission();
+            public void onClick(View view) {
+                Toast.makeText(getActivity().getApplicationContext(),"At least 1 contact must be selected",Toast.LENGTH_SHORT).show();
+
             }
         });
-    return root;}
 
+        return root;
+    }
     @SuppressLint("Range")
     private void getContacts(){
         ContentResolver contentResolver = getActivity().getApplicationContext().getContentResolver();
@@ -111,7 +115,7 @@ public class ContactListFragment extends Fragment {
 
     public void requestContactPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getView().getContext(), android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                         android.Manifest.permission.READ_CONTACTS)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getView().getContext());
@@ -158,9 +162,3 @@ public class ContactListFragment extends Fragment {
         }
     }
 }
-
-
-
-
-
-

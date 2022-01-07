@@ -40,7 +40,7 @@ public class MainScreen extends Fragment {
                 //Do something after 100ms
                 Navigation.findNavController(getView()).navigate(R.id.action_navigationMainScreen_to_nav_graph2);
             }
-        }, 7000);
+        }, 6000);
 
       constraintLayout.setOnClickListener(new View.OnClickListener() {
           @Override
