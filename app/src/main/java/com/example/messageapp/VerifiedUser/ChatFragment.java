@@ -16,11 +16,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class ChatFragment extends Fragment {
 
     //This is our tablayout
     private TabLayout tabLayout;
+    TabItem itemchat;
 
     //This is our viewPager
     private ViewPager2 viewPager;
@@ -52,6 +56,21 @@ public class ChatFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
         //Initializing the tablayout
         tabLayout = root.findViewById(R.id.tablayout);
+        itemchat = root.findViewById(R.id.chattab);
+        Button button = root.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_chatFragment_to_chats);
+            }
+        });
+
+//        itemchat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//               Navigation.findNavController(view).navigate(R.id.action_chatFragment_to_chats);
+//            }
+//        });
 
         //Adding the tabs using addTab() method
 
@@ -66,6 +85,7 @@ public class ChatFragment extends Fragment {
         // add Fragments in your ViewPagerFragmentAdapter class
         arrayList.add(new CameraFragment());
         arrayList.add(new Chats());
+
         arrayList.add(new Status());
         arrayList.add(new Calls());
 //
@@ -75,22 +95,40 @@ public class ChatFragment extends Fragment {
 
         viewPager.setAdapter(viewPagerAdapter);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
+        tabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
+                                               @Override
+                                               public void onTabSelected(TabLayout.Tab tab) {
+                                                   viewPager.setCurrentItem(tab.getPosition());
+                                                   switch (tab.getPosition()) {
+                                                       case 0:
+                                                           return;
+                                                       case 1:
+                                                           switch (tab.getPosition()) {
+                                                               case 0:
+                                                                   return;
+                                                               case 1:
+                                tabLayout.getTabAt(1).select();
+                        Navigation.findNavController(getView()).navigate(R.id.action_chatFragment_to_chats);
+//                                                                   Navigation.findNavController(getView()).navigate(R.id.action_chatFragment_to_chats);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
 
-            }
+                                                           }
+                                                   }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
+                                               }
+
+                                               @Override
+                                               public void onTabUnselected(TabLayout.Tab tab) {
+
+                                               }
+
+                                               @Override
+                                               public void onTabReselected(TabLayout.Tab tab) {
+
+
+                                               }
+                                           });
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

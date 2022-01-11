@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/cfcfcf"
+    android:orientation="horizontal"
+    tools:context=".VerifiedUser.PersonFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="18dp"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/ic_baseline_send_24" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/roundcorner"
+        android:backgroundTint="@color/silver"
+        android:inputType="text"
+        android:padding="10dip" />
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/imagebutton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginLeft="170dp"-->
+<!--        android:layout_marginBottom="18dp"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:src="@drawable/ic_baseline_attach_file_24" />-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/imagebutton1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginRight="50dp"-->
+<!--        android:layout_marginBottom="18dp"-->
+<!--        android:layout_marginLeft="220dp"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:src="@drawable/ic_baseline_ppphoto_camera_24" />-->
+
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/imagebutton2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginLeft="4dp"-->
+<!--        android:layout_marginBottom="18dp"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:src="@drawable/ic_baseline_tag_faces_24" />-->
+
+
+
+</RelativeLayout>

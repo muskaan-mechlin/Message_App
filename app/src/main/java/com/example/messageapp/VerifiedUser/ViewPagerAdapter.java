@@ -6,7 +6,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.legacy.app.FragmentPagerAdapter;
 import androidx.lifecycle.Lifecycle;
+import androidx.navigation.Navigation;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.messageapp.R;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter  {
             switch (position) {
                 case 0 :
                     return new CameraFragment();
+
                 case 1:
                     return new Chats();
                 case 2:

@@ -1,11 +1,14 @@
 package com.example.messageapp.VerifiedUser;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -14,11 +17,14 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -34,10 +40,12 @@ import java.util.List;
 
 public class ContactListFragment extends Fragment {
     public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    private static final String TAG = "ContactList";
     MyCustomAdapter dataAdapter = null;
     ListView listView;
     Button btnGetContacts;
     List<ContactsInfo> contactsInfoList;
+    String name;
 
 
     @Override
@@ -52,17 +60,40 @@ public class ContactListFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_contact_list2, container, false);
 
-        btnGetContacts = root.findViewById(R.id.btnGetContacts);
         listView = root.findViewById(R.id.lstContacts);
         listView.setAdapter(dataAdapter);
 
-        btnGetContacts.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                requestContactPermission();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+                name = contactsInfoList.get(i).getDisplayName();
+                Log.d(TAG, "onItemClick: "+name);
+
+                detailsPhone();
+
+                Navigation.findNavController(view).navigate(R.id.action_contactListFragment_to_personFragment);
+
             }
         });
+
+
+                requestContactPermission();
+
+
     return root;}
+
+    public void detailsPhone() {
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("DisplayName", name);
+        editor.apply();
+        editor.commit();
+
+
+        Log.d(TAG, "details: "+name);
+
+        Log.d(TAG, "details: "+preferences.getString("DisplayName",""));
+    }
 
     @SuppressLint("Range")
     private void getContacts(){
@@ -111,7 +142,7 @@ public class ContactListFragment extends Fragment {
 
     public void requestContactPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getView().getContext(), android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                         android.Manifest.permission.READ_CONTACTS)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getView().getContext());

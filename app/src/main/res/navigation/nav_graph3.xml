@@ -201,12 +201,12 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.messageapp.VerifiedUser.AboutFragment"
-        android:label="fragment_about"
+        android:label="About"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/chats"
         android:name="com.example.messageapp.VerifiedUser.Chats"
-        android:label="fragment_chats"
+        android:label="Chats"
         tools:layout="@layout/fragment_chats" >
 
         <action
@@ -217,7 +217,11 @@
         android:id="@+id/contactListFragment"
         android:name="com.example.messageapp.VerifiedUser.ContactListFragment"
         android:label="Contacts"
-        tools:layout="@layout/fragment_contact_list2" />
+        tools:layout="@layout/fragment_contact_list2" >
+        <action
+            android:id="@+id/action_contactListFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+    </fragment>
     <fragment
         android:id="@+id/groupFragment"
         android:name="com.example.messageapp.VerifiedUser.GroupFragment"
@@ -228,5 +232,10 @@
         android:name="com.example.messageapp.VerifiedUser.BroadcastFragment"
         android:label="New Broadcast"
         tools:layout="@layout/fragment_broadcast" />
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.example.messageapp.VerifiedUser.PersonFragment"
+        android:label=""
+        tools:layout="@layout/fragment_person" />
 
 </navigation>
