@@ -14,6 +14,8 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -22,23 +24,29 @@ import androidx.navigation.Navigation;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupMenu;
+
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
+import com.google.firebase.database.Query;
 
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ContactListFragment extends Fragment {
+public class ContactListFragment extends Fragment  {
     public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     private static final String TAG = "ContactList";
     MyCustomAdapter dataAdapter = null;
@@ -51,6 +59,7 @@ public class ContactListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
@@ -81,6 +90,117 @@ public class ContactListFragment extends Fragment {
 
 
     return root;}
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.bottom_app_bar3, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem searchItem = menu.findItem(R.id.btnsett2);
+
+        searchItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.btnsett2).getActionView();
+        searchView.setQueryHint("Search People");
+//        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+        searchView.setIconified(false);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                if (contactsInfoList.contains(s)) {
+                    dataAdapter.getFilter().filter(s);
+                }
+                else {
+                    // Search query not found in List View
+                    Toast
+                            .makeText(getActivity().getApplicationContext(),
+                                    "Not found",
+                                    Toast.LENGTH_LONG)
+                            .show();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                dataAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+                return false;
+            }
+        });
+
+
+        MenuItem setting = menu.findItem(R.id.btnsett1);
+        setting.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                final PopupMenu popupMenu = new PopupMenu(getActivity().getApplicationContext(),getView());
+
+                //add menu items in popup menu
+                popupMenu.getMenu().add(Menu.NONE, 0, 0, "Invite a friend"); //parm 2 is menu id, param 3 is position of this menu item in menu items list, param 4 is title of the menu
+                popupMenu.getMenu().add(Menu.NONE, 1, 1, "Contacts");
+                popupMenu.getMenu().add(Menu.NONE, 2, 2, "Refresh");
+                popupMenu.getMenu().add(Menu.NONE, 3, 3, "Help");
+
+                //handle menu item clicks
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        //get id of the clicked item
+                        int id = menuItem.getItemId();
+                        //handle clicks
+                        if (id==0){
+                            //Copy clicked
+                            //set text
+                           return true;
+                        }
+                        else if (id==1){
+                            //Share clicked
+                            //set text
+                         return true;
+                        }
+                        else if (id==2){
+                            //Save clicked
+                            //set text
+                         return true;
+                        }
+                        else if (id==3){
+                            //Delete clicked
+                            //set text
+                        return true;
+                        }
+                        return false;
+                    }
+                });
+
+
+                popupMenu.show();
+                return true;
+            }
+
+        });
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.btnsett1) {
+            return true;
+        }
+        if (id == R.id.btnsett2) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     public void detailsPhone() {
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);
@@ -137,7 +257,9 @@ public class ContactListFragment extends Fragment {
 
         dataAdapter = new MyCustomAdapter(getActivity().getApplicationContext(), R.layout.contact_info, contactsInfoList);
         listView.setAdapter(dataAdapter);
+
     }
+
 
 
     public void requestContactPermission() {
@@ -188,6 +310,17 @@ public class ContactListFragment extends Fragment {
             }
         }
     }
+
+
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        return false;
+//    }
 }
 
 

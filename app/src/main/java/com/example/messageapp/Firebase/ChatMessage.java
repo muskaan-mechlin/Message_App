@@ -10,8 +10,9 @@ public class ChatMessage {
     private String type;
     private String timestamp;
     private long messageTime;
+            String userId;
 
-    public ChatMessage(String messageText, String messageUser,String receiver,String sender,String type,String timestamp,long messageTime) {
+    public ChatMessage(String messageText, String messageUser,String receiver,String sender,String type,String timestamp,long messageTime,String userId) {
         this.messageText = messageText;
         this.messageUser = messageUser;
         this.receiver = receiver;
@@ -19,6 +20,7 @@ public class ChatMessage {
         this.type = type;
         this.timestamp = timestamp;
         this.messageTime = messageTime;
+        this.userId = userId;
 
         // Initialize to current time
 //        messageTime = new Date().getTime();
@@ -83,5 +85,13 @@ public class ChatMessage {
 
     public void setMessageTime(long messageTime) {
         this.messageTime = messageTime;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

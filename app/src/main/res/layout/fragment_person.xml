@@ -23,7 +23,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="7dp"
-            android:layout_marginBottom="18dp"
+            android:layout_marginBottom="22dp"
             android:backgroundTint="@color/white"
             app:srcCompat="@drawable/ic_baseline_send_24" />
 
@@ -37,7 +37,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="18dp"
         android:background="@drawable/roundcorner"
-        android:backgroundTint="@color/silver"
+        android:backgroundTint="@color/lightyellow"
         android:inputType="text"
         android:padding="10dip" />
 

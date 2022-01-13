@@ -25,6 +25,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PersonFragment extends Fragment {
@@ -57,7 +59,7 @@ public class PersonFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText input = (EditText)root.findViewById(R.id.edit);
+                EditText input = root.findViewById(R.id.edit);
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
@@ -71,7 +73,7 @@ public class PersonFragment extends Fragment {
                                         .getCurrentUser()
                                         .getDisplayName(),phonenumber, FirebaseAuth.getInstance()
                                 .getCurrentUser().getDisplayName()
-                                ,"text", String.valueOf(System.currentTimeMillis()),new Date().getTime())
+                                ,"text", String.valueOf(System.currentTimeMillis()),new Date().getTime(),FirebaseAuth.getInstance().getCurrentUser().getUid())
                         );
 
 

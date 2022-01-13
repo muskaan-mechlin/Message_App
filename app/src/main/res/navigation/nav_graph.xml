@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_navigationMainScreen_to_nav_graph2"
             app:destination="@id/nav_graph2" />
+        <action
+            android:id="@+id/action_navigationMainScreen_to_nav_graph3"
+            app:destination="@id/nav_graph3" />
     </fragment>
 
 
@@ -194,7 +197,7 @@
 <!--        tools:layout="@layout/fragment_delete" />-->
 
                 <include app:graph="@navigation/nav_graph2" />
-
+    <include app:graph="@navigation/nav_graph3" />
 
 
 </navigation>

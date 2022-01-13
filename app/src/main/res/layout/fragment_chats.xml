@@ -11,7 +11,7 @@
         android:layout_height="100dp"
         android:id="@+id/layout"
         android:layout_alignParentBottom="true"
-        android:background="@color/palegreen"
+        android:background="@color/lightyellow"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -20,7 +20,7 @@
             android:id="@+id/start"
             android:text="  Start a chat -> "
             android:textSize="23dp"
-            android:textColor="@color/green"
+            android:textColor="@color/darkgreen"
             android:textStyle="bold"
             android:layout_marginLeft="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,6 +41,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:contentDescription="Cgat"
+            android:backgroundTint="@color/white"
             app:srcCompat="@drawable/ic_baseline_chat_24"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -57,13 +57,13 @@ public class ChatFragment extends Fragment {
         //Initializing the tablayout
         tabLayout = root.findViewById(R.id.tablayout);
         itemchat = root.findViewById(R.id.chattab);
-        Button button = root.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_chatFragment_to_chats);
-            }
-        });
+//        Button button = root.findViewById(R.id.button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Navigation.findNavController(view).navigate(R.id.action_chatFragment_to_chats);
+//            }
+//        });
 
 //        itemchat.setOnClickListener(new View.OnClickListener() {
 //            @Override
