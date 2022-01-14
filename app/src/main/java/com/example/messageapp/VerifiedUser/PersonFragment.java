@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.FloatProperty;
@@ -19,19 +20,28 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.messageapp.Firebase.ChatMessage;
+import com.example.messageapp.Firebase.User_Model;
 import com.example.messageapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class PersonFragment extends Fragment {
     FloatingActionButton fab;
     String phonenumber;
+    DatabaseReference databaseReference;
+    List<ChatMessage> listOfChatMessages;
 
 
     private static final String TAG = "PersonFragment";
@@ -55,26 +65,66 @@ public class PersonFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_person, container, false);
         fab = root.findViewById(R.id.floating_action_button);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+       Query query = databaseReference.child("conversations").child("1").child("messages");
+       query.addChildEventListener(new ChildEventListener() {
+           @Override
+           public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+               snapshot.getChildrenCount();
+               ChatMessage message = snapshot.getValue(ChatMessage.class);
+               Log.d(TAG, "onChildAdded: "+snapshot.getChildrenCount());
+               Log.d(TAG, "onChildAdded: "+previousChildName);
+               Log.d(TAG, "onChildAdded: "+message.getMessageText());
 
+           }
+
+           @Override
+           public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+           }
+
+           @Override
+           public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+           }
+
+           @Override
+           public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText input = root.findViewById(R.id.edit);
+                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+             String username = sharedPreferences3.getString("name", "");
+
+             ChatMessage newChatMessage = new ChatMessage(input.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"text");
+
+//             listOfChatMessages.add(newChatMessage);
+             databaseReference.child("conversations").child("1").child("messages").push().setValue(newChatMessage);
+
+//                User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
+//                databaseReference.child("conversations").child("1").child("participants").push().setValue(userModel);
+
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
 //
-                FirebaseDatabase.getInstance()
-                        .getReference()
-                        .push()
-                        .child("messages")
-                        .setValue(new ChatMessage(input.getText().toString(),
-                                FirebaseAuth.getInstance()
-                                        .getCurrentUser()
-                                        .getDisplayName(),phonenumber, FirebaseAuth.getInstance()
-                                .getCurrentUser().getDisplayName()
-                                ,"text", String.valueOf(System.currentTimeMillis()),new Date().getTime(),FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        );
+//                FirebaseDatabase.getInstance()
+//                        .getReference()
+//                        .push()
+//                        .child("messages")
+//                        .setValue(new ChatMessage(input.getText().toString(),
+//                                username,phonenumber, username
+//                                ,"text", String.valueOf(System.currentTimeMillis()),new Date().getTime(),FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                        );
 
 
 

@@ -121,6 +121,8 @@ public class Chat1Fragment extends Fragment {
                        else{
                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
+
+
                        }
 
 

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
@@ -25,7 +26,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
-    ImageButton nameBtn,aboutBtn,phoneBtn;
+    ImageButton nameBtn,aboutBtn,phoneBtn,name1Btn,about1Btn,profileBtn;
     TextInputEditText aboutEt,nameEt,phoneEt;
 
 
@@ -42,7 +43,10 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         nameBtn = root.findViewById(R.id.imagebtn1);
+        profileBtn = root.findViewById(R.id.imagebtn);
+        name1Btn = root.findViewById(R.id.imagebtn2);
         aboutBtn = root.findViewById(R.id.imagebtn3);
+        about1Btn = root.findViewById(R.id.imagebtn4);
         phoneBtn = root.findViewById(R.id.imagebtn5);
         aboutEt = root.findViewById(R.id.about);
         nameEt = root.findViewById(R.id.name);
@@ -65,6 +69,13 @@ public class ProfileFragment extends Fragment {
         Log.d(TAG, "onCreateView: "+status);
         Log.d(TAG, "onCreateView: "+aboutEt);
 
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheetDialog1();
+            }
+        });
+
 
 
 
@@ -74,8 +85,26 @@ public class ProfileFragment extends Fragment {
                 showBottomSheetDialog();
             }
         });
+        nameEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheetDialog();
+            }
+        });
+        name1Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheetDialog();
+            }
+        });
 
         aboutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_aboutFragment);
+            }
+        });
+        about1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_aboutFragment);
@@ -91,6 +120,38 @@ public class ProfileFragment extends Fragment {
 
         return root;
     }
+    private void showBottomSheetDialog1() {
+
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getView().getContext());
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog5);
+
+        TextView name = bottomSheetDialog.findViewById(R.id.textview);
+        TextView name1 = bottomSheetDialog.findViewById(R.id.textview1);
+        TextView name2 = bottomSheetDialog.findViewById(R.id.textview2);
+        ImageButton btn1 = bottomSheetDialog.findViewById(R.id.imagebtn);
+        ImageButton btn2 = bottomSheetDialog.findViewById(R.id.imagebtn1);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(), "Clicked ", Toast.LENGTH_LONG).show();
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(), "Clicked ", Toast.LENGTH_LONG).show();
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        bottomSheetDialog.show();
+
+
+    }
+
 
     private void showBottomSheetDialog() {
 
@@ -107,6 +168,22 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Clicked ", Toast.LENGTH_LONG).show();
                 bottomSheetDialog.dismiss();
             }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("name",name.getText().toString());
+
+                editor.apply();
+                editor.commit();
+                Log.d(TAG, "onClick: "+name);
+                Log.d(TAG, "onClick: "+name.getText().toString());
+                bottomSheetDialog.dismiss();
+
+            }
+
         });
 
         bottomSheetDialog.show();

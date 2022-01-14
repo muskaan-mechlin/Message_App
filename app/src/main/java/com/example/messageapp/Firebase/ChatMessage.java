@@ -23,7 +23,7 @@ public class ChatMessage {
         this.userId = userId;
 
         // Initialize to current time
-//        messageTime = new Date().getTime();
+        messageTime = new Date().getTime();
     }
 
     public ChatMessage(){
@@ -72,6 +72,12 @@ public class ChatMessage {
     }
 
     public void setType(String type) {
+        this.type = type;
+    }
+
+    public ChatMessage(String messageText, String messageUser, String type) {
+        this.messageText = messageText;
+        this.messageUser = messageUser;
         this.type = type;
     }
 

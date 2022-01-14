@@ -164,17 +164,14 @@ public class ContactListFragment extends Fragment  {
                             //set text
                          return true;
                         }
-                        else if (id==2){
+                        else //Delete clicked
+                            //set text
+                            if (id==2){
                             //Save clicked
                             //set text
                          return true;
                         }
-                        else if (id==3){
-                            //Delete clicked
-                            //set text
-                        return true;
-                        }
-                        return false;
+                        else return id == 3;
                     }
                 });
 
