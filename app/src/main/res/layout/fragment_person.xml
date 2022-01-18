@@ -41,6 +41,33 @@
         android:inputType="text"
         android:padding="10dip" />
 
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/textview"-->
+<!--        android:text="ABC"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textColor="@color/maroon"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        />-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/textview1"-->
+<!--        android:text="ABC"-->
+<!--       android:layout_below="@id/textview"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textColor="@color/indigo"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginRight="40dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        />-->
+
 <!--    <ImageButton-->
 <!--        android:id="@+id/imagebutton"-->
 <!--        android:layout_width="wrap_content"-->
@@ -72,6 +99,16 @@
 <!--        android:layout_marginBottom="18dp"-->
 <!--        android:backgroundTint="@color/white"-->
 <!--        android:src="@drawable/ic_baseline_tag_faces_24" />-->
+
+    <ListView
+        android:id="@+id/list_of_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/edit"
+        android:layout_alignParentTop="true"
+        android:padding="8dp"
+        android:divider="@color/darkcyan" />
+
 
 
 

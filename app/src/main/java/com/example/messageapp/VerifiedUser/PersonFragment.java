@@ -2,6 +2,7 @@ package com.example.messageapp.VerifiedUser;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -9,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.FloatProperty;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,10 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.messageapp.Firebase.ChatMessage;
 import com.example.messageapp.Firebase.User_Model;
 import com.example.messageapp.R;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -30,18 +35,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-public class PersonFragment extends Fragment {
+public  class PersonFragment extends Fragment {
     FloatingActionButton fab;
     String phonenumber;
     DatabaseReference databaseReference;
     List<ChatMessage> listOfChatMessages;
+    User_Model userModel;
+    ChatMessage chatMessage;
+    ListView listView;
+
+    FirebaseListAdapter<ChatMessage> myAdapter;
 
 
     private static final String TAG = "PersonFragment";
@@ -65,9 +71,19 @@ public class PersonFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_person, container, false);
         fab = root.findViewById(R.id.floating_action_button);
+        listView = root.findViewById(R.id.list_of_messages);
         databaseReference = FirebaseDatabase.getInstance().getReference();
-       Query query = databaseReference.child("conversations").child("1").child("messages");
+        String conversationId;
+        conversationId = getArguments().getString("ConersationID");
+        Log.d(TAG, "onCreateView: "+conversationId);
+
+
+       Query query = databaseReference.child("conversations").child(conversationId).child("messages");
+
+
+
        query.addChildEventListener(new ChildEventListener() {
+           @SuppressLint("ResourceAsColor")
            @Override
            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                snapshot.getChildrenCount();
@@ -76,6 +92,22 @@ public class PersonFragment extends Fragment {
                Log.d(TAG, "onChildAdded: "+previousChildName);
                Log.d(TAG, "onChildAdded: "+message.getMessageText());
 
+               User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+
+
+               if (userModel.getSender().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getUid()) ){
+                   listView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+                   Log.d(TAG, "onChildAdded: Message"+message.getMessageText());
+        }
+        else{
+
+            listView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+            listView.setBackgroundColor(R.color.red);
+
+        }
            }
 
            @Override
@@ -98,6 +130,32 @@ public class PersonFragment extends Fragment {
 
            }
        });
+        FirebaseListOptions<ChatMessage> options =
+                new FirebaseListOptions.Builder<ChatMessage>()
+                        .setLayout(R.layout.message)
+                        .setQuery(query, ChatMessage.class)
+                        .build();
+
+        myAdapter = new FirebaseListAdapter<ChatMessage>(options) {
+            @Override
+            protected void populateView(View v, ChatMessage model, int position) {
+                // Get references to the views of message.xml
+                TextView messageText = v.findViewById(R.id.message_text);
+                TextView messageTime = v.findViewById(R.id.message_time);
+
+                // Set their text
+                messageText.setText(model.getMessageText());
+                Log.d(TAG, "populateView: Messagetext "+model.getMessageText());
+                // Format the date before showing it
+                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
+            }
+        };
+        listView.setAdapter(myAdapter);
+
+//       displayMessages();
+
+//
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +166,8 @@ public class PersonFragment extends Fragment {
              ChatMessage newChatMessage = new ChatMessage(input.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"text");
 
 //             listOfChatMessages.add(newChatMessage);
-             databaseReference.child("conversations").child("1").child("messages").push().setValue(newChatMessage);
+             databaseReference.child("conversations").child(conversationId).child("messages").push().setValue(newChatMessage);
+
 
 //                User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
 //                databaseReference.child("conversations").child("1").child("participants").push().setValue(userModel);
@@ -140,6 +199,37 @@ public class PersonFragment extends Fragment {
         });
         return root;
     }
+//String message2 = chatMessage.getMessageText();
+//     public void displayMessages() {
+//         Query query = databaseReference.child("conversations").child("1").child("messages");
+//
+//         FirebaseListOptions<ChatMessage> options =
+//                 new FirebaseListOptions.Builder<ChatMessage>()
+//                         .setLayout(R.layout.message)
+//                         .setQuery(query, ChatMessage.class)
+//                         .build();
+//
+//         myAdapter = new FirebaseListAdapter<ChatMessage>(options) {
+//             @Override
+//             protected void populateView(View v, ChatMessage model, int position) {
+//                 // Get references to the views of message.xml
+//                 TextView messageText = (TextView) v.findViewById(R.id.message_text);
+//                 TextView messageTime = (TextView) v.findViewById(R.id.message_time);
+//
+//                 // Set their text
+//                 messageText.setText(model.getMessageText());
+//                 Log.d(TAG, "populateView: Messagetext "+model.getMessageText());
+//                 // Format the date before showing it
+//                 messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
+//             }
+//         };
+//         listView.setAdapter(myAdapter);
+
+
+
+
+
+
 
 
 
@@ -190,6 +280,11 @@ public class PersonFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        myAdapter.startListening();
     }
 
 
