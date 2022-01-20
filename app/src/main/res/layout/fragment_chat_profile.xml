@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VerifiedUser.ChatProfileFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollview"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relative">
+
+    <ImageButton
+        android:id="@+id/imagebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="7dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_baseline_account_circle_24" />
+
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imagebutton"
+                android:layout_centerHorizontal="true"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview1"
+        android:text="Name"
+        android:layout_below="@id/textview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18dp"/>
+
+    <ImageButton
+        android:id="@+id/imagebutton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/iccccc_baseline_chat_24" />
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imagebutton1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="48dp"
+        android:text="Chat"
+        android:textColor="@color/darkgreen"
+        android:textSize="17dp"
+        android:textStyle="bold" />
+
+
+            <ImageButton
+                android:id="@+id/imagebutton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview1"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="7dp"
+                android:layout_toRightOf="@id/imagebutton1"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/icc_baseline_local_phone_24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview3"
+        android:textStyle="bold"
+        android:text="Audio"
+        android:textColor="@color/darkgreen"
+        android:textSize="17dp"
+        android:layout_below="@id/imagebutton2"
+        android:layout_marginLeft="82dp"
+        android:layout_toRightOf="@id/textview2"/>
+
+            <ImageButton
+                android:id="@+id/imagebutton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview1"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="35dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/iccc_baseline_videocam_24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview4"
+        android:text="Video"
+        android:textSize="17dp"
+        android:textColor="@color/darkgreen"
+        android:textStyle="bold"
+        android:layout_below="@id/imagebutton3"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="45dp"/>
+
+
+            <TextView
+                android:id="@+id/textview5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="22dp"
+                android:text="status"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:id="@+id/switchbutton"
+                android:text="Mute notifications"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="20dp"
+                tools:ignore="MissingConstraints"
+                android:gravity="left"
+                android:layout_below="@id/textview5"/>
+
+            <ImageButton
+                android:id="@+id/imagebutton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview5"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_baseline_notifications_24" />
+
+            <ImageButton
+                android:id="@+id/imagebutton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imagebutton4"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_baseline_music_note_24" />
+
+            <TextView
+                android:id="@+id/textview6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/switchbutton"
+                android:layout_marginTop="12dp"
+                android:layout_toRightOf="@id/imagebutton5"
+                android:text="Custom notifications"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+
+            <ImageButton
+                android:id="@+id/imagebutton6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imagebutton5"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/icc_baseline_insert_photo_24" />
+
+            <TextView
+                android:id="@+id/textview7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview6"
+                android:layout_marginTop="38dp"
+                android:layout_toRightOf="@id/imagebutton6"
+                android:text="Media visibility"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/imagebutton7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imagebutton6"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ilc_baseline_lock_24" />
+
+            <TextView
+                android:id="@+id/textview8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview7"
+                android:layout_marginTop="38dp"
+                android:layout_toRightOf="@id/imagebutton7"
+                android:text="Encryption\nMessages and calls are\nend-to-end encrypted.\nTap to verify."
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview8"
+                android:layout_marginTop="9dp"
+                android:layout_toRightOf="@id/imagebutton7"
+                android:text="Disappearing messages"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/imagebutton9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview9"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_baseline_block_24" />
+
+
+            <TextView
+                android:id="@+id/textview10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview9"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/imagebutton9"
+                android:text="Block"
+                android:textColor="@color/maroon"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+            <ImageButton
+                android:id="@+id/imagebutton10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview10"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_baseline_thumb_down_alt_24" />
+
+            <TextView
+                android:id="@+id/textview11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textview10"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/imagebutton10"
+                android:text="Report"
+                android:textColor="@color/maroon"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

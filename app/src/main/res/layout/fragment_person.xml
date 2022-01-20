@@ -41,6 +41,17 @@
         android:inputType="text"
         android:padding="10dip" />
 
+    <ImageButton
+        android:id="@+id/imagebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="170dp"
+        android:layout_marginBottom="19dp"
+        android:backgroundTint="@color/lightyellow"
+        android:src="@drawable/ic_baseline_attach_file_24" />
+
 <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

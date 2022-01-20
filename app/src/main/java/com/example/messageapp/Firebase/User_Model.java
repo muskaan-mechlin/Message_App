@@ -8,6 +8,9 @@ public class User_Model {
         this.receiver = receiver;
         this.sender = sender;
     }
+    public User_Model(){
+
+    }
 
     public String getReceiver() {
         return receiver;

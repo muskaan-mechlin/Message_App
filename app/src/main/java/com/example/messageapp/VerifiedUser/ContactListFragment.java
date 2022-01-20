@@ -69,6 +69,7 @@ public class ContactListFragment extends Fragment  {
     List<ContactsInfo> contactsInfoList;
     String name,phoneno;
     List<ChatMessage> listOfChatMessages;
+    String ConversationID;
 
 
 
@@ -122,6 +123,19 @@ public class ContactListFragment extends Fragment  {
 
 
     return root;}
+    public void detailsConversationId() {
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("ConversationId",ConversationID);
+        editor.apply();
+        editor.commit();
+
+
+        Log.d(TAG, "details: "+ConversationID);
+
+        Log.d(TAG, "details: "+preferences.getString("ConversationId",""));
+    }
+
 
     public void checkExistingConversation(View v){
 
@@ -144,6 +158,9 @@ public class ContactListFragment extends Fragment  {
                         Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getId());
                         Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData());
                         Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData().get("ParticipantsPhoneNo"));
+
+                        ConversationID = queryDocumentSnapshot.getId();
+                        detailsConversationId();
 
                         Set<String> setOfDatabasePhoneNumber = new HashSet<>();
                         setOfDatabasePhoneNumber.addAll((Collection<? extends String>) queryDocumentSnapshot.getData().get("ParticipantsPhoneNo"));
@@ -361,7 +378,7 @@ public class ContactListFragment extends Fragment  {
         }
         cursor.close();
 
-        dataAdapter = new MyCustomAdapter(getActivity().getApplicationContext(), R.layout.contact_info, contactsInfoList);
+        dataAdapter = new MyCustomAdapter(getActivity().getApplicationContext(), R.layout.message1, contactsInfoList);
         listView.setAdapter(dataAdapter);
 
     }
