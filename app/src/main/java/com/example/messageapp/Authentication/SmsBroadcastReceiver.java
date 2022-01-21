@@ -25,7 +25,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                     smsBroadcastReceiverListener.onSuccess(messageIntent);
                     break;
                 case CommonStatusCodes.TIMEOUT:
-                    smsBroadcastReceiverListener.onFailure();
+//                    smsBroadcastReceiverListener.onFailure();
                     break;
             }
         }

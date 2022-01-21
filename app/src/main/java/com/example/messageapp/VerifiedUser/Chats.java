@@ -44,6 +44,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
@@ -63,6 +64,7 @@ public class Chats extends Fragment {
     MyCustomAdapter adapter = null;
     ListView listView;
     FirebaseListAdapter<User_Model> myAdapter;
+    ValueEventListener valueEventListener;
 
 
 
@@ -94,6 +96,35 @@ public class Chats extends Fragment {
         User_Model userModel = new User_Model(displayName,FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         Query query = databaseReference.child("conversations").child("1").child("participants");
+
+                ValueEventListener postListener = new ValueEventListener(){
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    Log.d(TAG, "onDataChange: "+postSnapshot.getChildrenCount());
+                    Log.d(TAG, "onDataChange: "+postSnapshot.getValue());
+                    Log.d(TAG, "onDataChange: "+postSnapshot.child("receiver").getValue());
+
+                    if ((String.valueOf(postSnapshot.child("receiver").getValue())).contains(displayName)) {
+//                        databaseReference.child("conversations").child("1").child("participants").setValue(null);
+//                        databaseReference.child("conversations").child("1").child("participants").child("reciever").removeValue();
+//                        databaseReference.child("conversations").child("1").child("participants").removeValue();
+                        databaseReference.child("conversations").child("1").child("participants").child("reciever").setValue(null);
+//                        query.removeEventListener(valueEventListener);
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+                query.addValueEventListener(postListener);
 
 
         query.addChildEventListener(new ChildEventListener() {
@@ -155,6 +186,7 @@ public class Chats extends Fragment {
                 // Set their text
                 messageText.setText("");
                 messageUser.setText(model.getReceiver());
+                Log.d(TAG, "populateView: "+model.getReceiver());
 
                 // Format the date before showing it
                 messageTime.setText("");

@@ -6,7 +6,7 @@
     android:padding="4dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/cardview"
         app:cardElevation="8dp"

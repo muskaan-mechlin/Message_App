@@ -140,7 +140,7 @@ public class ContactListFragment extends Fragment  {
     public void checkExistingConversation(View v){
 
         CollectionReference dbConversation = db.collection("Conversations");
-        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String currentUserPhoneNo = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         Log.d(TAG, "checkExistingConversation: "+currentUserPhoneNo);
         String otherUserPhoneNo = phoneno;

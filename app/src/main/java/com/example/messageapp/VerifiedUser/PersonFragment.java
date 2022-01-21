@@ -39,6 +39,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -99,7 +100,20 @@ public  class PersonFragment extends Fragment {
 
 
        Query query = databaseReference.child("conversations").child(conversationId).child("messages");
-
+//       query.addValueEventListener(new ValueEventListener() {
+//           @Override
+//           public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                       ChatMessage chatMessage = snapshot.getValue(ChatMessage.class);
+//               Log.d(TAG, "onDataChange: "+chatMessage.getMessageText());
+//           }
+//
+//           @Override
+//           public void onCancelled(@NonNull DatabaseError error) {
+//
+//           }
+//       });
+//
 
 
        query.addChildEventListener(new ChildEventListener() {
@@ -125,7 +139,7 @@ public  class PersonFragment extends Fragment {
         else{
 
             listView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-            listView.setBackgroundColor(R.color.red);
+//            listView.setBackgroundColor(R.color.red);
 
         }
            }

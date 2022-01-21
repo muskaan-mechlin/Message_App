@@ -37,15 +37,15 @@ public class MainScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
 
-        mAuth.getCurrentUser().getPhoneNumber();
+//        mAuth.getCurrentUser().getPhoneNumber();
 
         Log.d(TAG, "onCreateView: "+mAuth.getCurrentUser());
-        Log.d(TAG, "onCreateView: "+mAuth.getCurrentUser().getPhoneNumber());
-        Log.d(TAG, "onCreateView: "+mAuth.getCurrentUser().getDisplayName());
+//        Log.d(TAG, "onCreateView: "+mAuth.getCurrentUser().getPhoneNumber());
+//        Log.d(TAG, "onCreateView: "+mAuth.getCurrentUser().getDisplayName());
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
-            Navigation.findNavController(view).navigate(R.id.action_navigationMainScreen_to_nav_graph2);
+//            Navigation.findNavController(view).navigate(R.id.action_navigationMainScreen_to_nav_graph2);
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -84,7 +84,7 @@ public class MainScreen extends Fragment {
 //            // User is already signed in, show list of messages
 //            Navigation.findNavController(getView()).navigate(R.id.action_navigationMainScreen_to_nav_graph3);
 //        }
-
+//
 //        final Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
 //            @Override
@@ -94,12 +94,12 @@ public class MainScreen extends Fragment {
 //            }
 //        }, 6000);
 
-      constraintLayout.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              Navigation.findNavController(view).navigate(R.id.action_navigationMainScreen_to_nav_graph2);
-          }
-      });
+//      constraintLayout.setOnClickListener(new View.OnClickListener() {
+//          @Override
+//          public void onClick(View view) {
+//              Navigation.findNavController(view).navigate(R.id.action_navigationMainScreen_to_nav_graph2);
+//          }
+//      });
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
