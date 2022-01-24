@@ -95,36 +95,7 @@ public class Chats extends Fragment {
         ChatMessage newChatMessage = new ChatMessage(message, displayName,"text");
         User_Model userModel = new User_Model(displayName,FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        Query query = databaseReference.child("conversations").child("1").child("participants");
-
-                ValueEventListener postListener = new ValueEventListener(){
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    Log.d(TAG, "onDataChange: "+postSnapshot.getChildrenCount());
-                    Log.d(TAG, "onDataChange: "+postSnapshot.getValue());
-                    Log.d(TAG, "onDataChange: "+postSnapshot.child("receiver").getValue());
-
-                    if ((String.valueOf(postSnapshot.child("receiver").getValue())).contains(displayName)) {
-//                        databaseReference.child("conversations").child("1").child("participants").setValue(null);
-//                        databaseReference.child("conversations").child("1").child("participants").child("reciever").removeValue();
-//                        databaseReference.child("conversations").child("1").child("participants").removeValue();
-                        databaseReference.child("conversations").child("1").child("participants").child("reciever").setValue(null);
-//                        query.removeEventListener(valueEventListener);
-
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-                query.addValueEventListener(postListener);
+        Query query = databaseReference.child("conversations").child(conversationId).child("participants");
 
 
         query.addChildEventListener(new ChildEventListener() {

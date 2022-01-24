@@ -1,4 +1,4 @@
-package com.example.messageapp;
+package com.example.messageapp.Authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.messageapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SplashScreen extends AppCompatActivity {

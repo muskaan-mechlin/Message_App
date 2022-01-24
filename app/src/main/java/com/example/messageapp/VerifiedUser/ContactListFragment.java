@@ -36,6 +36,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.messageapp.Firebase.ChatMessage;
+import com.example.messageapp.Firebase.User_Model;
+import com.example.messageapp.Model;
 import com.example.messageapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -105,6 +107,11 @@ public class ContactListFragment extends Fragment  {
                 String recieverId = FirebaseAuth.getInstance().getUid();
                 Log.d(TAG, "onItemClick: "+recieverId);
 
+                addDataToFirestore();
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+                String username = sharedPreferences.getString("name", "");
+                Log.d(TAG, "onItemClick: Current user "+FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
+
 
 
 
@@ -134,6 +141,29 @@ public class ContactListFragment extends Fragment  {
         Log.d(TAG, "details: "+ConversationID);
 
         Log.d(TAG, "details: "+preferences.getString("ConversationId",""));
+    }
+    public void userId(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String username = sharedPreferences.getString("name", "");
+        CollectionReference dbUser = db.collection("Users");
+        Map<String, Object> values = new HashMap<>();
+        values.put("Name",username);
+        values.put("PhoneNumber",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
+
+        db.collection("Users").add(values).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(@NonNull DocumentReference documentReference) {
+                Log.d(TAG, "onSuccess: "+documentReference.getId());
+
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
     }
 
 
@@ -213,6 +243,7 @@ public class ContactListFragment extends Fragment  {
                     }
                 });
     }
+
 
 
 
@@ -433,6 +464,47 @@ public class ContactListFragment extends Fragment  {
             }
         }
     }
+
+    private void addDataToFirestore() {
+
+        // creating a collection reference
+        // for our Firebase Firetore database.
+        CollectionReference dbReciever = db.collection("Reciever");
+
+        // adding our data to our courses object class.
+//        User_Model userModel = new User_Model(name,FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Map<String, Object> values = new HashMap<>();
+        values.put("otherUser", name);
+        Log.d(TAG, "addDataToFirestore: "+dbReciever);
+
+
+
+        // below method is use to add data to Firebase Firestore.
+
+
+        dbReciever.add(values).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                // after the data addition is successful
+                // we are displaying a success toast message.
+//                Toast.makeText(MainActivity.this, "Your Course has been added to Firebase Firestore", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onSuccess: " +name);
+                Log.d(TAG, "onSuccess: " +values);
+                Log.d(TAG, "onSuccess: " +documentReference.get());
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // this method is called when the data addition process is failed.
+                // displaying a toast message when data addition is failed.
+//                Toast.makeText(MainActivity.this, "Fail to add course \n" + e, Toast.LENGTH_SHORT).show();
+
+                Log.d(TAG, "onFailure: Failed");
+            }
+        });
+    }
+
 
 
 //    @Override

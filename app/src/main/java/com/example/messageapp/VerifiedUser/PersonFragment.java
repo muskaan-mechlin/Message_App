@@ -205,10 +205,10 @@ public  class PersonFragment extends Fragment {
 
 
                 User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
-                databaseReference.child("conversations").child("1").child("participants").push().setValue(userModel);
+                databaseReference.child("conversations").child(conversationId).child("participants").push().setValue(userModel);
                 Log.d(TAG, "onClick: "+userModel.getReceiver());
-                Log.d(TAG, "onClick: "+databaseReference.child("conversations").child("1").child("participants").getDatabase());
-                Log.d(TAG, "onClick: "+databaseReference.child("conversations").child("1").child("participants").child(userModel.getReceiver()));
+                Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId).child("participants").getDatabase());
+                Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId).child("participants").child(userModel.getReceiver()));
 
 
                 // Read the input field and push a new instance
