@@ -71,7 +71,7 @@ public class ContactListFragment extends Fragment  {
     List<ContactsInfo> contactsInfoList;
     String name,phoneno;
     List<ChatMessage> listOfChatMessages;
-    String ConversationID;
+    String ConversationID,UserID;
 
 
 
@@ -91,6 +91,8 @@ public class ContactListFragment extends Fragment  {
         listView = root.findViewById(R.id.lstContacts);
         listView.setAdapter(dataAdapter);
         db = FirebaseFirestore.getInstance();
+        checkExistingUser();
+
 
 
 
@@ -142,29 +144,33 @@ public class ContactListFragment extends Fragment  {
 
         Log.d(TAG, "details: "+preferences.getString("ConversationId",""));
     }
-    public void userId(){
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
-        String username = sharedPreferences.getString("name", "");
+    public void checkExistingUser(){
         CollectionReference dbUser = db.collection("Users");
-        Map<String, Object> values = new HashMap<>();
-        values.put("Name",username);
-        values.put("PhoneNumber",FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
-
-        db.collection("Users").add(values).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        String currentUserPhoneNo = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
+        Log.d(TAG, "checkExistingUser: "+currentUserPhoneNo);
+        Query query = dbUser.whereArrayContainsAny("FullPhoneNumber", Arrays.asList(currentUserPhoneNo));
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(@NonNull DocumentReference documentReference) {
-                Log.d(TAG, "onSuccess: "+documentReference.getId());
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                        Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getId());
+                        Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData());
+                        Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData().get("FullPhoneNumber"));
+                       UserID = queryDocumentSnapshot.getId();
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+                        String username = sharedPreferences.getString("name", "");
+                        String phonenumber = sharedPreferences.getString("phonenumber", "");
 
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+
+                        createUserDetails(currentUserPhoneNo,"+91",name,phonenumber);
                     }
-                });
 
+                }
+            }
+        });
     }
+//
 
 
     public void checkExistingConversation(View v){
@@ -219,6 +225,30 @@ public class ContactListFragment extends Fragment  {
         bundle.putString("ConersationID", conversationId);
         Log.d(TAG, "navigateWithConversationId: "+bundle);
         Navigation.findNavController(v).navigate(R.id.action_contactListFragment_to_personFragment,bundle);
+
+    }
+    public void createUserDetails(String fullphoneno,String countryCode,String name,String phoneNumber) {
+        Map<String, Object> userDocument = new HashMap<>();
+        userDocument.put("FullPhoneNumber",fullphoneno);
+        userDocument.put("CountryCode",countryCode);
+        userDocument.put("Name",name);
+        userDocument.put("PhoneNumber",phoneNumber);
+        db.collection("Users")
+                .add(userDocument)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        Log.d(TAG, "onSuccess: "+documentReference.getId());
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
 
     }
 
