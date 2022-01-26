@@ -50,6 +50,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,7 +92,7 @@ public class ContactListFragment extends Fragment  {
         listView = root.findViewById(R.id.lstContacts);
         listView.setAdapter(dataAdapter);
         db = FirebaseFirestore.getInstance();
-        checkExistingUser();
+        checkUserExists();
 
 
 
@@ -144,30 +145,35 @@ public class ContactListFragment extends Fragment  {
 
         Log.d(TAG, "details: "+preferences.getString("ConversationId",""));
     }
-    public void checkExistingUser(){
+
+
+    public void checkUserExists(){
         CollectionReference dbUser = db.collection("Users");
         String currentUserPhoneNo = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
-        Log.d(TAG, "checkExistingUser: "+currentUserPhoneNo);
+        Log.d(TAG, "checkExistingUser:PhoneNumber "+currentUserPhoneNo);
+        Log.d(TAG, "checkUserExists: Number "+currentUserPhoneNo);
         Query query = dbUser.whereArrayContainsAny("FullPhoneNumber", Arrays.asList(currentUserPhoneNo));
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getId());
-                        Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData());
-                        Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData().get("FullPhoneNumber"));
+                        Log.d(TAG, "onComplete:users  " + queryDocumentSnapshot.getId());
+                        Log.d(TAG, "onComplete: user " + queryDocumentSnapshot.getData());
+                        Log.d(TAG, "onComplete:user " + queryDocumentSnapshot.getData().get("FullPhoneNumber"));
                        UserID = queryDocumentSnapshot.getId();
                         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
                         String username = sharedPreferences.getString("name", "");
                         String phonenumber = sharedPreferences.getString("phonenumber", "");
 
 
-                        createUserDetails(currentUserPhoneNo,"+91",name,phonenumber);
+//                        createUserDetails(currentUserPhoneNo,"+91",username,phonenumber);
                     }
 
                 }
+
             }
+
         });
     }
 //
@@ -191,7 +197,7 @@ public class ContactListFragment extends Fragment  {
                 if (task.isSuccessful()) {
                     boolean isChatExistAlready = false;
                     for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getId());
+                        Log.d(TAG, "onComplete: conversation" + queryDocumentSnapshot.getId());
                         Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData());
                         Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData().get("ParticipantsPhoneNo"));
 
@@ -219,6 +225,7 @@ public class ContactListFragment extends Fragment  {
         });
 
     }
+
     public void navigateWithConversationId(String conversationId,View v){
         Log.d(TAG, "navigateWithConversationId: "+conversationId);
         Bundle bundle = new Bundle();
@@ -227,6 +234,7 @@ public class ContactListFragment extends Fragment  {
         Navigation.findNavController(v).navigate(R.id.action_contactListFragment_to_personFragment,bundle);
 
     }
+
     public void createUserDetails(String fullphoneno,String countryCode,String name,String phoneNumber) {
         Map<String, Object> userDocument = new HashMap<>();
         userDocument.put("FullPhoneNumber",fullphoneno);
@@ -238,7 +246,7 @@ public class ContactListFragment extends Fragment  {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        Log.d(TAG, "DocumentSnapshot written with ID: user " + documentReference.getId());
                         Log.d(TAG, "onSuccess: "+documentReference.getId());
 
                     }
@@ -261,7 +269,7 @@ public class ContactListFragment extends Fragment  {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                        Log.d(TAG, "DocumentSnapshot written with ID conversation: " + documentReference.getId());
                        String conversationID = documentReference.getId();
                        navigateWithConversationId(conversationID,v);
                     }

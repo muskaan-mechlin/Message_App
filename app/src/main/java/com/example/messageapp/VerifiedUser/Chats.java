@@ -102,6 +102,7 @@ public class Chats extends Fragment {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
                 snapshot.getChildrenCount();
                 User_Model message = snapshot.getValue(User_Model.class);
                 Log.d(TAG, "onChildAdded: " + snapshot.getChildrenCount());
