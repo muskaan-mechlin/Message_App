@@ -105,12 +105,14 @@ public class ContactListFragment extends Fragment  {
                 Log.d(TAG, "onItemClick: "+name);
                 Log.d(TAG, "onItemClick: "+phoneno);
 
+                checkRecieverExists();
+
 
 
                 String recieverId = FirebaseAuth.getInstance().getUid();
                 Log.d(TAG, "onItemClick: "+recieverId);
 
-                addDataToFirestore();
+
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
                 String username = sharedPreferences.getString("name", "");
                 Log.d(TAG, "onItemClick: Current user "+FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
@@ -152,24 +154,24 @@ public class ContactListFragment extends Fragment  {
         String currentUserPhoneNo = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         Log.d(TAG, "checkExistingUser:PhoneNumber "+currentUserPhoneNo);
         Log.d(TAG, "checkUserExists: Number "+currentUserPhoneNo);
-        Query query = dbUser.whereArrayContainsAny("FullPhoneNumber", Arrays.asList(currentUserPhoneNo));
+        Query query = dbUser.whereEqualTo("FullPhoneNumber", currentUserPhoneNo);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()){
                     for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Log.d(TAG, "onComplete:users  " + queryDocumentSnapshot.getId());
+                        Log.d(TAG, "onComplete: result ");
+                        Log.d(TAG, "onComplete:usersId  " + queryDocumentSnapshot.getId());
                         Log.d(TAG, "onComplete: user " + queryDocumentSnapshot.getData());
                         Log.d(TAG, "onComplete:user " + queryDocumentSnapshot.getData().get("FullPhoneNumber"));
                        UserID = queryDocumentSnapshot.getId();
-                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
-                        String username = sharedPreferences.getString("name", "");
-                        String phonenumber = sharedPreferences.getString("phonenumber", "");
-
-
-//                        createUserDetails(currentUserPhoneNo,"+91",username,phonenumber);
                     }
-
+                }
+               else {
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+                    String username = sharedPreferences.getString("name", "");
+                    String phonenumber = sharedPreferences.getString("phonenumber", "");
+                    createUserDetails(currentUserPhoneNo,"+91",username,phonenumber);
                 }
 
             }
@@ -190,14 +192,14 @@ public class ContactListFragment extends Fragment  {
         setOfExistingPhoneNumber.add(currentUserPhoneNo);
         setOfExistingPhoneNumber.add(otherUserPhoneNo);
         Log.d(TAG, "checkExistingConversation: "+phoneno);
-        Query query = dbConversation.whereArrayContainsAny("ParticipantsPhoneNo", Arrays.asList(currentUserPhoneNo));
+        Query query = dbConversation.whereArrayContainsAny("ParticipantsPhoneNo", Arrays.asList(currentUserPhoneNo,phoneno));
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     boolean isChatExistAlready = false;
                     for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
-                        Log.d(TAG, "onComplete: conversation" + queryDocumentSnapshot.getId());
+                        Log.d(TAG, "onComplete: conversation  " + queryDocumentSnapshot.getId());
                         Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData());
                         Log.d(TAG, "onComplete: " + queryDocumentSnapshot.getData().get("ParticipantsPhoneNo"));
 
@@ -247,7 +249,7 @@ public class ContactListFragment extends Fragment  {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot written with ID: user " + documentReference.getId());
-                        Log.d(TAG, "onSuccess: "+documentReference.getId());
+                        Log.d(TAG, "onSuccess: ID  "+documentReference.getId());
 
                     }
                 })
@@ -502,17 +504,46 @@ public class ContactListFragment extends Fragment  {
             }
         }
     }
+    public void checkRecieverExists(){
+        CollectionReference dbUser = db.collection("Reciever");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String username = sharedPreferences.getString("DisplayName", "");
+        Query query = dbUser.whereEqualTo("user",name);
+        Log.d(TAG, "checkRecieverExists: "+username);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()){
+                    for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+                        Log.d(TAG, "onComplete: result ");
+                        Log.d(TAG, "onComplete: reciever "  + queryDocumentSnapshot.getId());
+                        Log.d(TAG, "onComplete: reciever " + queryDocumentSnapshot.getData());
 
+                    }
+
+                }
+                else {
+                    addDataToFirestore();
+                    Log.d(TAG, "onComplete: Firestore");
+                }
+
+
+            }
+
+        });
+    }
     private void addDataToFirestore() {
 
         // creating a collection reference
         // for our Firebase Firetore database.
         CollectionReference dbReciever = db.collection("Reciever");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+        String username = sharedPreferences.getString("DisplayName", "");
 
         // adding our data to our courses object class.
 //        User_Model userModel = new User_Model(name,FirebaseAuth.getInstance().getCurrentUser().getUid());
         Map<String, Object> values = new HashMap<>();
-        values.put("otherUser", name);
+        values.put("user", username);
         Log.d(TAG, "addDataToFirestore: "+dbReciever);
 
 
@@ -526,9 +557,9 @@ public class ContactListFragment extends Fragment  {
                 // after the data addition is successful
                 // we are displaying a success toast message.
 //                Toast.makeText(MainActivity.this, "Your Course has been added to Firebase Firestore", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onSuccess: " +name);
-                Log.d(TAG, "onSuccess: " +values);
-                Log.d(TAG, "onSuccess: " +documentReference.get());
+                Log.d(TAG, "onSuccess:reciever  " +username);
+                Log.d(TAG, "onSuccess:reciever " +values);
+                Log.d(TAG, "onSuccess: reciever" +documentReference.get());
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -542,6 +573,10 @@ public class ContactListFragment extends Fragment  {
             }
         });
     }
+
+
+
+
 
 
 

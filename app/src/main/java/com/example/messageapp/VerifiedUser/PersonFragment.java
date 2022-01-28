@@ -77,6 +77,7 @@ public  class PersonFragment extends Fragment {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -131,17 +132,7 @@ public  class PersonFragment extends Fragment {
 
 
 
-               if (userModel.getSender().equalsIgnoreCase(FirebaseAuth.getInstance().getCurrentUser().getUid()) ){
-                   listView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
-                   Log.d(TAG, "onChildAdded: Message"+message.getMessageText());
-        }
-        else{
-
-            listView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-//            listView.setBackgroundColor(R.color.red);
-
-        }
            }
 
            @Override
@@ -176,14 +167,20 @@ public  class PersonFragment extends Fragment {
                 // Get references to the views of message.xml
                 TextView messageText = v.findViewById(R.id.message_text);
                 TextView messageTime = v.findViewById(R.id.message_time);
+                userModel = new User_Model(FirebaseAuth.getInstance().getCurrentUser().getUid(),"");
 
-                // Set their text
-                messageText.setText(model.getMessageText());
+
+                    // Set their text
+                    messageText.setText(model.getMessageText());
+
+
                 Log.d(TAG, "populateView: Messagetext "+model.getMessageText());
                 // Format the date before showing it
                 messageTime.setText(DateFormat.format( "hh:ss a", model.getMessageTime()));
             }
         };
+//        userModel = new User_Model(FirebaseAuth.getInstance().getCurrentUser().getUid(),"");
+
         listView.setAdapter(myAdapter);
 
 //       displayMessages();

@@ -36,6 +36,10 @@ import com.example.messageapp.Firebase.User_Model;
 import com.example.messageapp.R;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -45,13 +49,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Chats extends Fragment {
     private static final String TAG = "Chats";
@@ -63,6 +75,7 @@ public class Chats extends Fragment {
     DatabaseReference databaseReference;
     MyCustomAdapter adapter = null;
     ListView listView;
+    private FirebaseFirestore db;
     FirebaseListAdapter<User_Model> myAdapter;
     ValueEventListener valueEventListener;
 
@@ -85,12 +98,15 @@ public class Chats extends Fragment {
         floatButton = root.findViewById(R.id.floating_action_button);
         listView = root.findViewById(R.id.list_of_messages);
         listView.setAdapter(adapter);
+        db = FirebaseFirestore.getInstance();
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String conversationId,message;
         SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
         conversationId = sharedPreferences1.getString("ConversationId", "");
         message = sharedPreferences1.getString("Message", "");
         String displayName = sharedPreferences1.getString("DisplayName", "");
+
 
         ChatMessage newChatMessage = new ChatMessage(message, displayName,"text");
         User_Model userModel = new User_Model(displayName,FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -180,6 +196,12 @@ public class Chats extends Fragment {
 
         return root;
     }
+
+
+
+//
+
+
 
 
 
