@@ -7,13 +7,13 @@
     tools:context=".VerifiedUser.Chats">
 
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_messages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        tools:ignore="NotSibling"/>
+        tools:ignore="NotSibling" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/layout"

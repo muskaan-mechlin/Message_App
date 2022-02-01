@@ -29,9 +29,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.messageapp.Firebase.ChatMessage;
 import com.example.messageapp.Firebase.MessageAdapter;
+import com.example.messageapp.Firebase.Reciever;
+import com.example.messageapp.Firebase.RecieverAdapter;
 import com.example.messageapp.Firebase.User_Model;
 import com.example.messageapp.R;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -47,11 +51,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
@@ -74,10 +79,15 @@ public class Chats extends Fragment {
     FloatingActionButton floatButton;
     DatabaseReference databaseReference;
     MyCustomAdapter adapter = null;
+    private RecyclerView usermodelview;
+    private ArrayList<Reciever> userArrayList;
+    RecieverAdapter recieverAdapter;
     ListView listView;
     private FirebaseFirestore db;
     FirebaseListAdapter<User_Model> myAdapter;
     ValueEventListener valueEventListener;
+    LinearLayoutManager linearLayoutManager;
+//    String UserID;
 
 
 
@@ -96,9 +106,18 @@ public class Chats extends Fragment {
         View root = inflater.inflate(R.layout.fragment_chats, container, false);
         startView = root.findViewById(R.id.start);
         floatButton = root.findViewById(R.id.floating_action_button);
-        listView = root.findViewById(R.id.list_of_messages);
-        listView.setAdapter(adapter);
+        usermodelview = root.findViewById(R.id.list_of_messages);
+
         db = FirebaseFirestore.getInstance();
+       userArrayList = new ArrayList<>();
+        usermodelview.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(),LinearLayoutManager.VERTICAL,false));
+        usermodelview.setItemViewCacheSize(10);
+////        recieverAdapter = new RecieverAdapter(userArrayList,getActivity().getApplicationContext());
+//
+//        // setting adapter to our recycler view.
+//        usermodelview.setAdapter(recieverAdapter);
+
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         String conversationId,message;
@@ -106,97 +125,61 @@ public class Chats extends Fragment {
         conversationId = sharedPreferences1.getString("ConversationId", "");
         message = sharedPreferences1.getString("Message", "");
         String displayName = sharedPreferences1.getString("DisplayName", "");
+        String userid = sharedPreferences1.getString("Userid","");
+        Log.d(TAG, "onCreateView: "+userid);
+
+
 
 
         ChatMessage newChatMessage = new ChatMessage(message, displayName,"text");
         User_Model userModel = new User_Model(displayName,FirebaseAuth.getInstance().getCurrentUser().getUid());
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        Query query = databaseReference.child("conversations").child(conversationId).child("participants");
-
-
-        query.addChildEventListener(new ChildEventListener() {
-            @SuppressLint("ResourceAsColor")
+        db.collection("Users").document(userid).collection("Contacts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> list = new ArrayList<>();
 
-                snapshot.getChildrenCount();
-                User_Model message = snapshot.getValue(User_Model.class);
-                Log.d(TAG, "onChildAdded: " + snapshot.getChildrenCount());
-                Log.d(TAG, "onChildAdded: " + snapshot.getValue());
-                Log.d(TAG, "onChildAdded: " + snapshot.getKey());
-                Log.d(TAG, "onChildAdded: " + snapshot.getValue(User_Model.class).toString());
-                Log.d(TAG, "onChildAdded: " + query.get().toString());
+                    for (QueryDocumentSnapshot document : task.getResult()) {
 
-                Log.d(TAG, "onChildAdded: " + previousChildName);
+                        list.add(document.getString("Name"));
+                        Log.d(TAG, "onComplete:1 "+document.getData());
+                        Log.d(TAG, "onComplete:2 "+document.getId());
+                        Log.d(TAG, "onComplete:3 "+document.getString("Name"));
+//                        recieverAdapter = new RecieverAdapter(list,getActivity().getApplicationContext());
+//
+//                        // setting adapter to our recycler view.
+//                        usermodelview.setAdapter(recieverAdapter);
+                    }
 
-                Log.d(TAG, "onChildAdded: " + message.getSender());
-                Log.d(TAG, "onChildAdded: " + message.getReceiver());
-
-
-            }
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+                    Log.d(TAG, "onComplete: "+list.toString());
+                    recieverAdapter = new RecieverAdapter(list,getActivity().getApplicationContext());
+                    usermodelview.setAdapter(recieverAdapter);
+                    }
+                else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
             }
         });
 
-
-                FirebaseListOptions<User_Model> options =
-                new FirebaseListOptions.Builder<User_Model>()
-                        .setLayout(R.layout.message1)
-                        .setQuery(query, User_Model.class)
-                        .build();
-
-        myAdapter = new FirebaseListAdapter<User_Model>(options) {
-            @Override
-            protected void populateView(View v, User_Model model, int position) {
-                // Get references to the views of message.xml
-                TextView messageText = v.findViewById(R.id.message_text);
-                ImageButton messageImage = v.findViewById(R.id.message_image);
-                TextView messageUser = v.findViewById(R.id.message_user);
-                TextView messageTime = v.findViewById(R.id.message_time);
-
-                // Set their text
-                messageText.setText("");
-                messageUser.setText(model.getReceiver());
-                Log.d(TAG, "populateView: "+model.getReceiver());
-
-                // Format the date before showing it
-                messageTime.setText("");
-            }
-        };
-        listView.setAdapter(myAdapter);
-//        User_Model userModel1 = new User_Model(displayName,FirebaseAuth.getInstance().getCurrentUser().getUid());
-//        databaseReference.child("conversations").child(conversationId).child("participants").push().setValue(userModel1);
-//
 
         floatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_chats_to_contactListFragment);
+//                Navigation.findNavController(view).navigate(R.id.action_chats_to_contactListFragment);
             }
         });
-//
-//
+
 
         return root;
     }
 
+    }
+//
+
+
+
 
 
 //
@@ -205,9 +188,9 @@ public class Chats extends Fragment {
 
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        myAdapter.startListening();
-    }
-}
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        myAdapter.startListening();
+//    }
+
