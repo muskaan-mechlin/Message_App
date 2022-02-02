@@ -16,6 +16,7 @@ import android.provider.ContactsContract;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -65,10 +66,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class Chats extends Fragment {
     private static final String TAG = "Chats";
@@ -87,6 +91,7 @@ public class Chats extends Fragment {
     FirebaseListAdapter<User_Model> myAdapter;
     ValueEventListener valueEventListener;
     LinearLayoutManager linearLayoutManager;
+    String ConversationID;
 //    String UserID;
 
 
@@ -126,6 +131,8 @@ public class Chats extends Fragment {
         message = sharedPreferences1.getString("Message", "");
         String displayName = sharedPreferences1.getString("DisplayName", "");
         String userid = sharedPreferences1.getString("Userid","");
+        String recievername = sharedPreferences1.getString("RecieverName","");
+        Log.d(TAG, "onCreateView:RR "+recievername);
         Log.d(TAG, "onCreateView: "+userid);
 
 
@@ -154,6 +161,8 @@ public class Chats extends Fragment {
                     }
 
                     Log.d(TAG, "onComplete: "+list.toString());
+                    Log.d(TAG, "onComplete: "+list.toString());
+
                     recieverAdapter = new RecieverAdapter(list,getActivity().getApplicationContext());
                     usermodelview.setAdapter(recieverAdapter);
                     }
@@ -167,15 +176,19 @@ public class Chats extends Fragment {
         floatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Navigation.findNavController(view).navigate(R.id.action_chats_to_contactListFragment);
+
+                Navigation.findNavController(view).navigate(R.id.action_chats_to_contactListFragment);
             }
         });
+
 
 
         return root;
     }
 
-    }
+
+}
+
 //
 
 

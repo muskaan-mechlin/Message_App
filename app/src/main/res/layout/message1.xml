@@ -37,7 +37,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginRight="8dp"
         android:text="abc"
-        android:textColor="@color/silver"
+        android:textColor="@color/white"
         android:textSize="12dp"
         android:textStyle="bold" />
 
@@ -50,8 +50,16 @@
         android:layout_marginTop="50dp"
         android:layout_toRightOf="@id/message_image"
         android:text="abcd"
-        android:textColor="@color/gray_400"
+        android:textColor="@color/white"
         android:textSize="12dp"
         android:textStyle="bold" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:id="@+id/view"
+        android:backgroundTint="@color/silver"
+        android:layout_below="@id/message_text"
+        android:background="@color/silver"
+        android:layout_marginTop="17dp"/>
 
     </RelativeLayout>

@@ -47,6 +47,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -159,13 +160,27 @@ public class ContactListFragment extends Fragment  {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     boolean isContactExistAlready = false;
+
+
                     for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                         Log.d(TAG, "onComplete: Contact " + queryDocumentSnapshot.getId());
                         Log.d(TAG, "onComplete: Contact " + queryDocumentSnapshot.getData());
                         isContactExistAlready = true;
                     }
                     if(!isContactExistAlready) {
-                        createContacts(name,phoneNumber,"");
+                        db.collection("Users").whereEqualTo("FullPhoneNumber",phoneNumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(@NonNull QuerySnapshot querySnapshots) {
+                                for(DocumentSnapshot documentSnapshot : querySnapshots.getDocuments()) {
+                                    Log.d(TAG, "onSuccess: FullId " + documentSnapshot.getId());
+                                    String uId = documentSnapshot.getId();
+                                    Log.d(TAG, "onSuccess:LiD "+uId);
+                                    createContacts(name,phoneNumber,uId);
+                                }
+
+                            }
+                        });
+//                        createContacts(name,phoneNumber,"");
                     }
                 }
             }
@@ -503,8 +518,29 @@ public class ContactListFragment extends Fragment  {
                     contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                     displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
+
                     contactsInfo.setContactId(contactId);
-                    contactsInfo.setDisplayName(displayName);
+                    String finalDisplayName = displayName;
+                    db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Contacts").whereEqualTo("Name",displayName).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
+                           boolean isNameExist = false;
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                Log.d(TAG, "onSuccess: 11 "+documentSnapshot.getId());
+                                isNameExist = true;
+
+
+                            }
+                            if(isNameExist) {
+                                contactsInfo.setDisplayName(finalDisplayName);
+                            }
+                            else {
+
+                            }
+
+                        }
+                    });
+//                    contactsInfo.setDisplayName(displayName);
 
                     Cursor phoneCursor =getActivity().getApplicationContext().getContentResolver().query(
                             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -515,8 +551,27 @@ public class ContactListFragment extends Fragment  {
 
                     if (phoneCursor.moveToNext()) {
                         String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Contacts").whereEqualTo("PhoneNumber",phoneNumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
+                              boolean  isPhoneExist = false;
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+                                    Log.d(TAG, "onSuccess: 114 "+documentSnapshot.getId());
+                                    contactsInfo.setPhoneNumber(phoneNumber);
+                                    isPhoneExist = true;
 
-                        contactsInfo.setPhoneNumber(phoneNumber);
+                                }
+                                if (isPhoneExist) {
+                                    contactsInfo.setPhoneNumber(phoneNumber);
+                                }
+                                else {
+
+                                }
+
+
+                            }
+                        });
+//                        contactsInfo.setPhoneNumber(phoneNumber);
                     }
 
                     phoneCursor.close();
@@ -528,6 +583,16 @@ public class ContactListFragment extends Fragment  {
         cursor.close();
 
         dataAdapter = new MyCustomAdapter(getActivity().getApplicationContext(), R.layout.message1, contactsInfoList);
+//        db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Contacts").whereEqualTo("Name",displayName).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//            @Override
+//            public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
+//                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
+//                    Log.d(TAG, "onSuccess: 11 "+documentSnapshot.getId());
+//                    listView.setAdapter(dataAdapter);
+//                }
+
+//            }
+//        });
         listView.setAdapter(dataAdapter);
 
     }

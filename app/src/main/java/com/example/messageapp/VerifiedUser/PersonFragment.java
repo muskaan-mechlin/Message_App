@@ -50,7 +50,7 @@ import java.util.TimeZone;
 
 public  class PersonFragment extends Fragment {
     FloatingActionButton fab;
-    String phonenumber;
+    String phonenumber,rnamee;
     DatabaseReference databaseReference;
     List<ChatMessage> listOfChatMessages;
     User_Model userModel;
@@ -87,6 +87,11 @@ public  class PersonFragment extends Fragment {
         listView = root.findViewById(R.id.list_of_messages);
         editText = root.findViewById(R.id.edit);
         attachButton = root.findViewById(R.id.imagebutton);
+
+        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences("user_shared_preference", MODE_PRIVATE);
+
+         rnamee = sharedPreferences1.getString("RecieverName","");
+        Log.d(TAG, "onCreateView:00 "+rnamee);
 
         attachButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -335,10 +340,14 @@ public  class PersonFragment extends Fragment {
 
         SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
         phonenumber = sharedPreferences1.getString("DisplayName", "");
+        String rname = sharedPreferences1.getString("RecieverName","");
+        Log.d(TAG, "onCreateOptionsMenu: "+rname);
+        Log.d(TAG, "onCreateOptionsMenu: "+sharedPreferences1.getString("RecieverName",""));
 
         Log.d(TAG, "onMenuItemClick: "+phonenumber);
 
         name.setTitle(phonenumber);
+        name.setTitle(rname);
 
         setting.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
