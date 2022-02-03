@@ -101,7 +101,7 @@ String reciever1,rphoneno,ConversationID;
         private final TextView messageUser;
         private final TextView messageText;
         private final TextView messageTime;
-        private FirebaseFirestore db;
+        private final FirebaseFirestore db;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

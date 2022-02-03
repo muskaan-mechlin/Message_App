@@ -115,16 +115,16 @@ public class Chat1Fragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 //                       fontView.setText("Selected Item is : " + listItems[which]);
-                       if ( listItems.equals("Light")){
-                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        }
-                       else{
-                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-
-
-                       }
-
+//                       if ( listItems.equals("Light")){
+//                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                        }
+//                       else{
+//                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//
+//
+//
+//                       }
+//
 
                         fontView.setText("Selected Item is" + listItems[which]);
                         Toast.makeText(getActivity().getApplicationContext(), "Position: " + which + " Value: " + listItems[which], Toast.LENGTH_LONG).show();

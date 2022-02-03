@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.provider.ContactsContract;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,8 +38,6 @@ import android.widget.Toast;
 
 import com.example.messageapp.Firebase.ChatMessage;
 import com.example.messageapp.Firebase.Reciever;
-import com.example.messageapp.Firebase.User_Model;
-import com.example.messageapp.Model;
 import com.example.messageapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,15 +52,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -115,6 +113,11 @@ public class ContactListFragment extends Fragment  {
                  phoneno = contactsInfoList.get(i).getPhoneNumber();
                 Log.d(TAG, "onItemClick: "+name);
                 Log.d(TAG, "onItemClick: "+phoneno);
+                String phoneNumberUtils = PhoneNumberUtils.stripSeparators(phoneno);
+                Log.d(TAG, "onItemClick: 1 "+phoneNumberUtils);
+//                Log.d(TAG, "onItemClick:2 "+PhoneNumberUtils.formatNumber(phoneno,Locale.getDefault().getCountry()));
+                splitMobilenumberMethod();
+
 
                 checkRecieverExists();
 //                createContacts(name,phoneno,"");
@@ -559,6 +562,7 @@ public class ContactListFragment extends Fragment  {
 
                     if (phoneCursor.moveToNext()) {
                         String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
                         db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Contacts").whereEqualTo("PhoneNumber",phoneNumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
@@ -739,7 +743,29 @@ public class ContactListFragment extends Fragment  {
 
 
 
+    void splitMobilenumberMethod(){
+        String phoneNumb = phoneno;
+        String ext = "", phoneN = "";
+        if (phoneNumb.startsWith("+") || phoneNumb.length() > 10) {
+            phoneN =  phoneno;
+//
+            Log.d(TAG, "splitMobilenumberMethod: "+phoneN);
+            Log.d(TAG, "splitMobilenumberMethod: "+phoneno);
+        } else {
+            if (phoneNumb.length()==10){
+                phoneN = "+91"+phoneno;
+                Log.d(TAG, "splitMobilenumberMethod: "+phoneN);
+            }
+            else {
+                ext=phoneNumb.substring(0,1);
+                phoneN ="+91"+phoneNumb.substring(1);
+                Log.d(TAG, "splitMobilenumberMethod: "+ext);
+                Log.d(TAG, "splitMobilenumberMethod: "+phoneN);
+            }
 
+        }
+//        showSelectedPhoneDialog(ext, phoneN);
+    }
 
 
 //    @Override
