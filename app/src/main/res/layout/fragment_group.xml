@@ -9,7 +9,8 @@
         android:layout_width = "wrap_content"
         android:textSize = "30dp"
         android:layout_height = "wrap_content"
-        android:text = "Click"/>
+        android:text = "Click"
+        android:layout_below="@id/chipgroup"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
 
@@ -28,6 +29,19 @@
         app:srcCompat="@drawable/ic_baseline_arrow_forward_24"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chipgroup"
+        android:layout_alignParentTop="true"
+        app:selectionRequired="true"
+        app:singleSelection="false"
+        app:singleLine="false"
+        app:chipSpacingHorizontal="5dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        />
 
 
 </RelativeLayout>

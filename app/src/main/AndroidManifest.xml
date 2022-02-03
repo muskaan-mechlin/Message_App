@@ -40,7 +40,7 @@
             android:label="@string/title_activity_authentication"
             android:theme="@style/Theme.MessageApp.NoActionBar" />
         <activity
-            android:name=".Authentication.SplashScreen"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

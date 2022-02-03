@@ -1,4 +1,4 @@
-package com.example.messageapp.Authentication;
+package com.example.messageapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 

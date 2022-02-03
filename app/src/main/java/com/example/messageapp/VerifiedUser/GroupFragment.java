@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.ContactsContract;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class GroupFragment extends Fragment {
     FloatingActionButton fab;
     MyCustomAdapter dataAdapter = null;
     ListView listView;
-
+     ChipGroup chipGroup ;
     List<ContactsInfo> contactsInfoList;
 
 
@@ -54,9 +57,11 @@ public class GroupFragment extends Fragment {
 //        btnGetContacts = (Button) root.findViewById(R.id.btnGetContacts);
         listView = root.findViewById(R.id.list);
         fab = root.findViewById(R.id.floating_action_button);
+        chipGroup = root.findViewById(R.id.chipgroup);
         listView.setAdapter(dataAdapter);
 
-        requestContactPermission();
+
+          requestContactPermission();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +115,9 @@ public class GroupFragment extends Fragment {
 
         dataAdapter = new MyCustomAdapter(getActivity().getApplicationContext(), R.layout.contact_info, contactsInfoList);
         listView.setAdapter(dataAdapter);
+        setTag(contactsInfoList);
+//
+
     }
 
 
@@ -161,4 +169,33 @@ public class GroupFragment extends Fragment {
             }
         }
     }
+    private void setTag(final List<ContactsInfo> contactsInfoList) {
+
+        for (int index = 0; index < contactsInfoList.size(); index++) {
+            final ContactsInfo tagName = contactsInfoList.get(index);
+            final Chip chip = new Chip(getActivity().getApplicationContext());
+            int paddingDp = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 10,
+                    getResources().getDisplayMetrics()
+            );
+            chip.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
+            chip.setText((CharSequence) tagName);
+            chip.setCloseIconResource(R.drawable.ic_baseline_arrow_forward_24);
+            chip.setCloseIconEnabled(true);
+            //Added click listener on close icon to remove tag from ChipGroup
+            chip.setOnCloseIconClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    contactsInfoList.remove(tagName);
+                    chipGroup.removeView(chip);
+                }
+            });
+
+            chipGroup.addView(chip);
+        }
+
+
+
+    }
+
 }

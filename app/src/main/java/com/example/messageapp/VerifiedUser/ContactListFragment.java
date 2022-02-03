@@ -44,6 +44,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -76,7 +77,7 @@ public class ContactListFragment extends Fragment  {
     String name,phoneno;
     List<ChatMessage> listOfChatMessages;
     String ConversationID,UserID;
-
+     FloatingActionButton floatingActionButton;
 
 
     @Override
@@ -93,9 +94,16 @@ public class ContactListFragment extends Fragment  {
         View root = inflater.inflate(R.layout.fragment_contact_list2, container, false);
 
         listView = root.findViewById(R.id.lstContacts);
+        floatingActionButton = root.findViewById(R.id.floating_action_button);
         listView.setAdapter(dataAdapter);
         db = FirebaseFirestore.getInstance();
         checkUserExists();
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Navigation.findNavController(view).navigate(R.id.action_contactListFragment_to_groupFragment);
+            }
+        });
 
 
 

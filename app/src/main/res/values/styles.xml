@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Widget.Theme.MessageApp.MyView" parent="">
+    <style name="Widget.Theme.MessageApp.MyView" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <item name="android:background">@color/gray_400</item>
         <item name="exampleColor">@color/light_blue_400</item>
     </style>

@@ -224,6 +224,9 @@
         <action
             android:id="@+id/action_contactListFragment_to_personFragment"
             app:destination="@id/personFragment" />
+        <action
+            android:id="@+id/action_contactListFragment_to_groupFragment"
+            app:destination="@id/groupFragment" />
     </fragment>
     <fragment
         android:id="@+id/groupFragment"
