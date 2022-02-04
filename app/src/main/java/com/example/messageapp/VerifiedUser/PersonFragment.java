@@ -58,6 +58,7 @@ public  class PersonFragment extends Fragment {
     ListView listView;
     EditText editText;
     ImageButton attachButton;
+    String conversationId,conversationId1;
 
     FirebaseListAdapter<ChatMessage> myAdapter;
 
@@ -100,66 +101,82 @@ public  class PersonFragment extends Fragment {
             }
         });
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        String conversationId;
+
         conversationId = getArguments().getString("ConersationID");
-        Log.d(TAG, "onCreateView: "+conversationId);
+        conversationId1 = getArguments().getString("ConersationID1");
+
+        Log.d(TAG, "onCreateView:1 "+conversationId);
+        Log.d(TAG, "onCreateView:2 "+conversationId1);
+        detailsId();
+
+        if ( conversationId != null ) {
+            query();
+            Log.d(TAG, "onCreateView: 1 query()");
+        }
+        else {
+            query1();
+            Log.d(TAG, "onCreateView: 2 query1()");
+        }
 
 
-       Query query = databaseReference.child("conversations").child(conversationId).child("messages");
-//       query.addValueEventListener(new ValueEventListener() {
-//           @Override
-//           public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
 //
-//                       ChatMessage chatMessage = snapshot.getValue(ChatMessage.class);
-//               Log.d(TAG, "onDataChange: "+chatMessage.getMessageText());
-//           }
+
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                EditText input = root.findViewById(R.id.edit);
+//                messageText();
+//                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+//             String username = sharedPreferences3.getString("name", "");
 //
-//           @Override
-//           public void onCancelled(@NonNull DatabaseError error) {
-//
-//           }
-//       });
+////             query1();
+
+
 //
 
+        return root;
+    }
 
-       query.addChildEventListener(new ChildEventListener() {
-           @SuppressLint("ResourceAsColor")
-           @Override
-           public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-               snapshot.getChildrenCount();
-               ChatMessage message = snapshot.getValue(ChatMessage.class);
-               Log.d(TAG, "onChildAdded: "+snapshot.getChildrenCount());
-               Log.d(TAG, "onChildAdded: "+previousChildName);
-               Log.d(TAG, "onChildAdded: "+message.getMessageText());
+    private void query() {
 
-               User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
+        Query query = databaseReference.child("conversations").child(conversationId).child("messages");
+        Log.d(TAG, "query: "+conversationId);
+        query.addChildEventListener(new ChildEventListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                snapshot.getChildrenCount();
+                ChatMessage message = snapshot.getValue(ChatMessage.class);
+                Log.d(TAG, "onChildAdded: "+snapshot.getChildrenCount());
+                Log.d(TAG, "onChildAdded: "+previousChildName);
+                Log.d(TAG, "onChildAdded: "+message.getMessageText());
 
+                User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
 
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+            }
 
-           }
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-           @Override
-           public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
 
-           }
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-           @Override
-           public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            }
 
-           }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-           @Override
-           public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-
-           }
-       });
+            }
+        });
         FirebaseListOptions<ChatMessage> options =
                 new FirebaseListOptions.Builder<ChatMessage>()
                         .setLayout(R.layout.message)
@@ -175,8 +192,105 @@ public  class PersonFragment extends Fragment {
                 userModel = new User_Model(FirebaseAuth.getInstance().getCurrentUser().getUid(),"");
 
 
-                    // Set their text
-                    messageText.setText(model.getMessageText());
+                // Set their text
+                messageText.setText(model.getMessageText());
+
+
+                Log.d(TAG, "populateView: Messagetext "+model.getMessageText());
+                // Format the date before showing it
+                messageTime.setText(DateFormat.format( "hh:ss a", model.getMessageTime()));
+            }
+        };
+        listView.setAdapter(myAdapter);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+        ChatMessage newChatMessage = new ChatMessage(editText.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"text");
+
+//             listOfChatMessages.add(newChatMessage);
+        databaseReference.child("conversations").child(conversationId).child("messages").push().setValue(newChatMessage);
+
+
+        User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
+        databaseReference.child("conversations").child(conversationId).child("participants").push().setValue(userModel);
+        Log.d(TAG, "onClick: "+userModel.getReceiver());
+        Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId).child("participants").getDatabase());
+        Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId).child("participants").child(userModel.getReceiver()));
+
+
+
+                if(editText.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getActivity().getApplicationContext(),"Please enter some message",Toast.LENGTH_SHORT).show();
+                }else {
+                    editText.setText("");
+                }
+            }
+
+
+
+        });
+
+
+    }
+
+    public void query1() {
+        Query query1 = databaseReference.child("conversations").child(conversationId1).child("messages");
+        Log.d(TAG, "query1: "+conversationId1);
+        query1.addChildEventListener(new ChildEventListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                snapshot.getChildrenCount();
+                ChatMessage message = snapshot.getValue(ChatMessage.class);
+                Log.d(TAG, "onChildAdded: "+snapshot.getChildrenCount());
+                Log.d(TAG, "onChildAdded: "+previousChildName);
+                Log.d(TAG, "onChildAdded: "+message.getMessageText());
+
+                User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseListOptions<ChatMessage> options1 =
+                new FirebaseListOptions.Builder<ChatMessage>()
+                        .setLayout(R.layout.message)
+                        .setQuery(query1, ChatMessage.class)
+                        .build();
+
+        myAdapter = new FirebaseListAdapter<ChatMessage>(options1) {
+            @Override
+            protected void populateView(View v, ChatMessage model, int position) {
+                // Get references to the views of message.xml
+                TextView messageText = v.findViewById(R.id.message_text);
+                TextView messageTime = v.findViewById(R.id.message_time);
+                userModel = new User_Model(FirebaseAuth.getInstance().getCurrentUser().getUid(),"");
+
+
+                // Set their text
+                messageText.setText(model.getMessageText());
 
 
                 Log.d(TAG, "populateView: Messagetext "+model.getMessageText());
@@ -188,56 +302,34 @@ public  class PersonFragment extends Fragment {
 
         listView.setAdapter(myAdapter);
 
-//       displayMessages();
-
-//
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText input = root.findViewById(R.id.edit);
-                messageText();
-                SharedPreferences sharedPreferences3 = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
-             String username = sharedPreferences3.getString("name", "");
-
-             ChatMessage newChatMessage = new ChatMessage(input.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"text");
-
-//             listOfChatMessages.add(newChatMessage);
-             databaseReference.child("conversations").child(conversationId).child("messages").push().setValue(newChatMessage);
 
 
-                User_Model userModel = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
-                databaseReference.child("conversations").child(conversationId).child("participants").push().setValue(userModel);
-                Log.d(TAG, "onClick: "+userModel.getReceiver());
-                Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId).child("participants").getDatabase());
-                Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId).child("participants").child(userModel.getReceiver()));
+        ChatMessage newChatMessage = new ChatMessage(editText.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getUid(),"text");
 
 
-                // Read the input field and push a new instance
-                // of ChatMessage to the Firebase database
-//
-//                FirebaseDatabase.getInstance()
-//                        .getReference()
-//                        .push()
-//                        .child("messages")
-//                        .setValue(new ChatMessage(input.getText().toString(),
-//                                username,phonenumber, username
-//                                ,"text", String.valueOf(System.currentTimeMillis()),new Date().getTime(),FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                        );
+        databaseReference.child("conversations").child(conversationId1).child("messages").push().setValue(newChatMessage);
 
 
-
-                // Clear the input
-                input.setText("");
-
-//                FirebaseDatabase.getInstance()
-//                        .getReference()
-//                        .push()
-//                        .setValue("Id" + FirebaseAuth.getInstance().getCurrentUser().getUid());
-
+        User_Model userModel1 = new User_Model(phonenumber,FirebaseAuth.getInstance().getCurrentUser().getUid());
+        databaseReference.child("conversations").child(conversationId1).child("participants").push().setValue(userModel1);
+        Log.d(TAG, "onClick: "+userModel1.getReceiver());
+        Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId1).child("participants").getDatabase());
+//        Log.d(TAG, "onClick: "+databaseReference.child("conversations").child(conversationId1).child("participants").child(userModel1.getReceiver()));
+               if(editText.getText().toString().isEmpty())
+               {
+                   Toast.makeText(getActivity().getApplicationContext(),"Please enter some message",Toast.LENGTH_SHORT).show();
+               }else {
+                   editText.setText("");
+               }
             }
         });
-        return root;
+
+
+
+
     }
 
     private void showBottomSheetDialog() {
@@ -294,35 +386,6 @@ public  class PersonFragment extends Fragment {
 
 //        Log.d(TAG, "details: "+preferences.getString("ConversationId",""));
     }
-
-//String message2 = chatMessage.getMessageText();
-//     public void displayMessages() {
-//         Query query = databaseReference.child("conversations").child("1").child("messages");
-//
-//         FirebaseListOptions<ChatMessage> options =
-//                 new FirebaseListOptions.Builder<ChatMessage>()
-//                         .setLayout(R.layout.message)
-//                         .setQuery(query, ChatMessage.class)
-//                         .build();
-//
-//         myAdapter = new FirebaseListAdapter<ChatMessage>(options) {
-//             @Override
-//             protected void populateView(View v, ChatMessage model, int position) {
-//                 // Get references to the views of message.xml
-//                 TextView messageText = (TextView) v.findViewById(R.id.message_text);
-//                 TextView messageTime = (TextView) v.findViewById(R.id.message_time);
-//
-//                 // Set their text
-//                 messageText.setText(model.getMessageText());
-//                 Log.d(TAG, "populateView: Messagetext "+model.getMessageText());
-//                 // Format the date before showing it
-//                 messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getMessageTime()));
-//             }
-//         };
-//         listView.setAdapter(myAdapter);
-
-
-
 
 
 
@@ -385,6 +448,19 @@ public  class PersonFragment extends Fragment {
     public void onStart() {
         super.onStart();
         myAdapter.startListening();
+    }
+    public void detailsId() {
+        SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("ContactChatId", conversationId);
+        editor.putString("DchatId",conversationId1);
+        editor.apply();
+        editor.commit();
+
+
+        Log.d(TAG, "details: "+conversationId);
+
+        Log.d(TAG, "details: "+preferences.getString("DchatId",""));
     }
 
 

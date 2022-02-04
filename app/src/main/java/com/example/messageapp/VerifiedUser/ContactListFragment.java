@@ -583,7 +583,7 @@ public class ContactListFragment extends Fragment  {
 
                         }
 
-                        db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Contacts").whereEqualTo("PhoneNumber",phoneNumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        db.collection("Users").whereEqualTo("FullPhoneNumber",phoneNumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
                               boolean  isPhoneExist = false;

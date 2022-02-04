@@ -167,7 +167,7 @@ public class ChatFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), getView());
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(),requireView());
 
 
                 //Inflating the Popup using xml file

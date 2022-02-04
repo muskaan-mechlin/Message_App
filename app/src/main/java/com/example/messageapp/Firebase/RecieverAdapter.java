@@ -116,7 +116,12 @@ String reciever1,rphoneno,ConversationID;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Contacts").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    Log.d(TAG, "onClick: 1111 "+itemView.findViewById(R.id.message_user));
+                    Log.d(TAG, "onClick:212 "+messageUser.getText().toString());
+                    String otherUser = messageUser.getText().toString();
+                    Log.d(TAG, "onClick: otheruser "+otherUser);
+                    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    db.collection("Users").document(currentUser).collection("Contacts").whereEqualTo("Name",otherUser).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots.getDocuments()) {
@@ -142,19 +147,20 @@ String reciever1,rphoneno,ConversationID;
         db = FirebaseFirestore.getInstance();
 
         SharedPreferences sharedPreferences1 = context.getSharedPreferences("user_shared_preference", MODE_PRIVATE);
-        String rphone = sharedPreferences1.getString("Rphoneno", "");
-        Log.d(TAG, "checkConversationExists: rrr" +rphone);
+        String recphone = sharedPreferences1.getString("Rphoneno", "");
+        Log.d(TAG, "checkConversationExists: rrr" +recphone);
+        Log.d(TAG, "checkConversationExists: rrn "+rphoneno);
 
 
         CollectionReference dbConversation = db.collection("Conversations");
         String currentUserPhoneNo = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         Log.d(TAG, "checkExistingConversation: "+currentUserPhoneNo);
-        String otherUserPhoneNo = rphone;
+        String otherUserPhoneNo = recphone;
         Set<String> setOfExistingPhoneNumber = new HashSet<>();
         setOfExistingPhoneNumber.add(currentUserPhoneNo);
         setOfExistingPhoneNumber.add(otherUserPhoneNo);
-        Log.d(TAG, "checkExistingConversation: "+rphone);
-        Query query = dbConversation.whereArrayContainsAny("ParticipantsPhoneNo", Arrays.asList(currentUserPhoneNo,rphone));
+        Log.d(TAG, "checkExistingConversation: 10909 "+recphone);
+        Query query = dbConversation.whereArrayContainsAny("ParticipantsPhoneNo", Arrays.asList(currentUserPhoneNo,recphone));
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -170,11 +176,11 @@ String reciever1,rphoneno,ConversationID;
 
                         Set<String> setOfDatabasePhoneNumber = new HashSet<>();
                         setOfDatabasePhoneNumber.addAll((Collection<? extends String>) queryDocumentSnapshot.getData().get("ParticipantsPhoneNo"));
-                        Log.d(TAG, "onComplete: SetMatches  "+setOfDatabasePhoneNumber.containsAll(setOfExistingPhoneNumber));
-                        if (setOfDatabasePhoneNumber.containsAll(setOfExistingPhoneNumber)){
-                            navigateWithConversationID(queryDocumentSnapshot.getId(),v);
+                        Log.d(TAG, "onComplete: SetMatches  " + setOfDatabasePhoneNumber.containsAll(setOfExistingPhoneNumber));
+                        if (setOfDatabasePhoneNumber.containsAll(setOfExistingPhoneNumber)) {
+                            navigateWithConversationID(queryDocumentSnapshot.getId(), v);
                             isChatExistAlready = true;
-                            break;
+//                            break;
                         }
 
                     }
@@ -190,7 +196,7 @@ String reciever1,rphoneno,ConversationID;
     private void navigateWithConversationID(String id,View v) {
         Log.d(TAG, "navigateWithConversationId: "+id);
         Bundle bundle = new Bundle();
-        bundle.putString("ConersationID", id);
+        bundle.putString("ConersationID1", id);
         Log.d(TAG, "navigateWithConversationId: "+bundle);
         Navigation.findNavController(v).navigate(R.id.action_chats_to_personFragment,bundle);
 
