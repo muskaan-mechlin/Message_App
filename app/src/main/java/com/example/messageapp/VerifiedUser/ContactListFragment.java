@@ -116,7 +116,7 @@ public class ContactListFragment extends Fragment  {
                 String phoneNumberUtils = PhoneNumberUtils.stripSeparators(phoneno);
                 Log.d(TAG, "onItemClick: 1 "+phoneNumberUtils);
 //                Log.d(TAG, "onItemClick:2 "+PhoneNumberUtils.formatNumber(phoneno,Locale.getDefault().getCountry()));
-                splitMobilenumberMethod();
+//                splitMobilenumberMethod();
 
 
                 checkRecieverExists();
@@ -546,7 +546,7 @@ public class ContactListFragment extends Fragment  {
                                 contactsInfo.setDisplayName(finalDisplayName);
                             }
                             else {
-
+                                dataAdapter.remove(contactsInfo);
                             }
 
                         }
@@ -562,6 +562,26 @@ public class ContactListFragment extends Fragment  {
 
                     if (phoneCursor.moveToNext()) {
                         String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        String phoneNumb = phoneNumber;
+                        String ext = "", phoneN = "";
+                        if (phoneNumb.startsWith("+") || phoneNumb.length() > 10) {
+                            phoneN =  phoneno;
+//
+                            Log.d(TAG, "splitMobilenumberMethod: "+phoneN);
+                            Log.d(TAG, "splitMobilenumberMethod: "+phoneNumber);
+                        } else {
+                            if (phoneNumb.length()==10){
+                                phoneN = "+91"+phoneno;
+                                Log.d(TAG, "splitMobilenumberMethod: "+phoneN);
+                            }
+                            else {
+                                ext=phoneNumb.substring(0,1);
+                                phoneN ="+91"+phoneNumb.substring(1);
+                                Log.d(TAG, "splitMobilenumberMethod: "+ext);
+                                Log.d(TAG, "splitMobilenumberMethod: "+phoneN);
+                            }
+
+                        }
 
                         db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Contacts").whereEqualTo("PhoneNumber",phoneNumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
@@ -576,8 +596,8 @@ public class ContactListFragment extends Fragment  {
                                 if (isPhoneExist) {
                                     contactsInfo.setPhoneNumber(phoneNumber);
                                 }
-                                else {
-
+                                else  {
+                                    dataAdapter.remove(contactsInfo);
                                 }
 
 
