@@ -26,18 +26,23 @@ import android.widget.Toast;
 
 import com.example.messageapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ChatFragment extends Fragment {
@@ -266,6 +271,15 @@ public class ChatFragment extends Fragment {
 
 
                     }
+                    if(!isUserExistAlready) {
+                        Log.d(TAG, "onComplete: UsernotExist");
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference), MODE_PRIVATE);
+                        String username = sharedPreferences.getString("name", "");
+                        String phonenumber = sharedPreferences.getString("phonenumber", "");
+                        createUserDetails(currentUserPhoneNo,"+91",username,phonenumber);
+
+
+                    }
 
                 }
 
@@ -276,6 +290,33 @@ public class ChatFragment extends Fragment {
 
 
     }
+
+    private void createUserDetails(String fullphoneno,String countryCode,String name,String phoneNumber) {
+        Map<String, Object> userDocument = new HashMap<>();
+        userDocument.put("FullPhoneNumber",fullphoneno);
+        userDocument.put("CountryCode",countryCode);
+        userDocument.put("Name",name);
+        userDocument.put("PhoneNumber",phoneNumber);
+        db.collection("Users")
+                .add(userDocument)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: user " + documentReference.getId());
+                        Log.d(TAG, "onSuccess: ID  "+documentReference.getId());
+                        UserID = documentReference.getId();
+                        detailsContacts();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
     public void detailsContacts(){
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
