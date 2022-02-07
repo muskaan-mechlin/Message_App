@@ -409,8 +409,12 @@ public  class PersonFragment extends Fragment {
 
         Log.d(TAG, "onMenuItemClick: "+phonenumber);
 
-        name.setTitle(phonenumber);
-        name.setTitle(rname);
+        if(phonenumber != null) {
+
+            name.setTitle(phonenumber);
+        }
+        else {
+            name.setTitle(rname); }
 
         setting.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

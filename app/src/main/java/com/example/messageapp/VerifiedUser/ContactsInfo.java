@@ -13,7 +13,7 @@ public class ContactsInfo {
         this.contactId = contactId;
     }
 
-    public String getDisplayName() {
+    public CharSequence getDisplayName() {
         return displayName;
     }
 

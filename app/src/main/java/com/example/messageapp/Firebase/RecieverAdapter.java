@@ -165,7 +165,7 @@ String reciever1,rphoneno,ConversationID;
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    boolean isChatExistAlready = false;
+
                     for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                         Log.d(TAG, "onComplete: conversation 11 " + queryDocumentSnapshot.getId());
                         Log.d(TAG, "onComplete: 22 " + queryDocumentSnapshot.getData());
@@ -179,7 +179,7 @@ String reciever1,rphoneno,ConversationID;
                         Log.d(TAG, "onComplete: SetMatches  " + setOfDatabasePhoneNumber.containsAll(setOfExistingPhoneNumber));
                         if (setOfDatabasePhoneNumber.containsAll(setOfExistingPhoneNumber)) {
                             navigateWithConversationID(queryDocumentSnapshot.getId(), v);
-                            isChatExistAlready = true;
+
 //                            break;
                         }
 

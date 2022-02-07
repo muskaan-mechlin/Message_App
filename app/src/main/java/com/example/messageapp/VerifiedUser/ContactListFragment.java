@@ -99,7 +99,7 @@ public class ContactListFragment extends Fragment  {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Navigation.findNavController(view).navigate(R.id.action_contactListFragment_to_groupFragment);
+                Navigation.findNavController(view).navigate(R.id.action_contactListFragment_to_groupFragment);
             }
         });
 
@@ -113,8 +113,10 @@ public class ContactListFragment extends Fragment  {
                  phoneno = contactsInfoList.get(i).getPhoneNumber();
                 Log.d(TAG, "onItemClick: "+name);
                 Log.d(TAG, "onItemClick: "+phoneno);
-                String phoneNumberUtils = PhoneNumberUtils.stripSeparators(phoneno);
-                Log.d(TAG, "onItemClick: 1 "+phoneNumberUtils);
+
+                detailsPhone();
+//                String phoneNumberUtils = PhoneNumberUtils.stripSeparators(phoneno);
+//                Log.d(TAG, "onItemClick: 1 "+phoneNumberUtils);
 //                Log.d(TAG, "onItemClick:2 "+PhoneNumberUtils.formatNumber(phoneno,Locale.getDefault().getCountry()));
 //                splitMobilenumberMethod();
 
@@ -138,7 +140,7 @@ public class ContactListFragment extends Fragment  {
 
             checkExistingConversation(view);
 
-                detailsPhone();
+//                detailsPhone();
 
 
 
@@ -498,9 +500,9 @@ public class ContactListFragment extends Fragment  {
         editor.commit();
 
 
-        Log.d(TAG, "details: "+name);
+        Log.d(TAG, "details:1 "+name);
 
-        Log.d(TAG, "details: "+preferences.getString("DisplayName",""));
+        Log.d(TAG, "details:2 "+preferences.getString("DisplayName",""));
     }
     public void detailsContacts(){
         SharedPreferences preferences = getActivity().getSharedPreferences(getString(R.string.user_shared_preference),MODE_PRIVATE);

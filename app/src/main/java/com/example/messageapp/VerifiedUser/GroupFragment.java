@@ -15,12 +15,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.ContactsContract;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messageapp.R;
@@ -34,11 +38,13 @@ import java.util.List;
 
 public class GroupFragment extends Fragment {
     public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    private static final String TAG = "GroupFragment";
     FloatingActionButton fab;
     MyCustomAdapter dataAdapter = null;
     ListView listView;
      ChipGroup chipGroup ;
     List<ContactsInfo> contactsInfoList;
+    TextView mTextView;
 
 
 
@@ -57,11 +63,52 @@ public class GroupFragment extends Fragment {
 //        btnGetContacts = (Button) root.findViewById(R.id.btnGetContacts);
         listView = root.findViewById(R.id.list);
         fab = root.findViewById(R.id.floating_action_button);
-        chipGroup = root.findViewById(R.id.chipgroup);
+        mTextView = root.findViewById(R.id.textview);
         listView.setAdapter(dataAdapter);
+//
+//        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+//        listView.setItemChecked(contactsInfoList.size(), true);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                SparseBooleanArray clickedItemPositions = listView.getCheckedItemPositions();
+                listView.getSelectedItem();
+                Log.d(TAG, "onItemClick: "+listView.getSelectedItem());
+//                mTextView.setText("Checked items - ");
+
+                for(int index=0;index<clickedItemPositions.size();index++){
+                    // Get the checked status of the current item
+                   String name = (String) contactsInfoList.get(i).getDisplayName();
+                    Log.d(TAG, "onItemClick: "+name);
+                    mTextView.setText("Checked items - " + name);
 
 
-          requestContactPermission();
+                    boolean checked = clickedItemPositions.valueAt(index);
+
+                    if(checked){
+                        // If the current item is checked
+                        int key = clickedItemPositions.keyAt(index);
+                        Log.d(TAG, "onItemClick: "+clickedItemPositions.keyAt(index));
+//                        String item = (String) listView.getItemAtPosition(key);
+
+                        // Display the checked items on TextView
+                        mTextView.setText(mTextView.getText() + " \n");
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+        requestContactPermission();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +161,11 @@ public class GroupFragment extends Fragment {
         cursor.close();
 
         dataAdapter = new MyCustomAdapter(getActivity().getApplicationContext(), R.layout.contact_info, contactsInfoList);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setItemChecked(contactsInfoList.size(), true);
         listView.setAdapter(dataAdapter);
-        setTag(contactsInfoList);
+
+//        setTag(contactsInfoList);
 //
 
     }
@@ -169,33 +219,33 @@ public class GroupFragment extends Fragment {
             }
         }
     }
-    private void setTag(final List<ContactsInfo> contactsInfoList) {
+//    private void setTag(final List<ContactsInfo> contactsInfoList) {
+//
+//        for (int index = 0; index < contactsInfoList.size(); index++) {
+//            final ContactsInfo tagName = contactsInfoList.get(index);
+//            final Chip chip = new Chip(getActivity().getApplicationContext());
+//            int paddingDp = (int) TypedValue.applyDimension(
+//                    TypedValue.COMPLEX_UNIT_DIP, 10,
+//                    getResources().getDisplayMetrics()
+//            );
+//            chip.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
+//            chip.setText((CharSequence) tagName);
+//            chip.setCloseIconResource(R.drawable.ic_baseline_arrow_forward_24);
+//            chip.setCloseIconEnabled(true);
+//            //Added click listener on close icon to remove tag from ChipGroup
+//            chip.setOnCloseIconClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    contactsInfoList.remove(tagName);
+//                    chipGroup.removeView(chip);
+//                }
+//            });
+//
+//            chipGroup.addView(chip);
+//        }
+//
 
-        for (int index = 0; index < contactsInfoList.size(); index++) {
-            final ContactsInfo tagName = contactsInfoList.get(index);
-            final Chip chip = new Chip(getActivity().getApplicationContext());
-            int paddingDp = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP, 10,
-                    getResources().getDisplayMetrics()
-            );
-            chip.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
-            chip.setText((CharSequence) tagName);
-            chip.setCloseIconResource(R.drawable.ic_baseline_arrow_forward_24);
-            chip.setCloseIconEnabled(true);
-            //Added click listener on close icon to remove tag from ChipGroup
-            chip.setOnCloseIconClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    contactsInfoList.remove(tagName);
-                    chipGroup.removeView(chip);
-                }
-            });
-
-            chipGroup.addView(chip);
-        }
 
 
-
-    }
 
 }
